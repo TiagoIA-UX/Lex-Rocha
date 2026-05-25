@@ -20,6 +20,9 @@
 .DS_Store
 *.pem
 
+# fotos originais do fundador (manter apenas versões recortadas)
+public/images/founder/source-*.png
+
 # debug
 npm-debug.log*
 yarn-debug.log*

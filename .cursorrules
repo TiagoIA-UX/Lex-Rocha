@@ -1,0 +1,42 @@
+# Lex Rocha — Cursor AI Rules
+
+## Stack obrigatória
+- Next.js 14 com App Router e TypeScript strict
+- Supabase para banco, auth e storage (sem Prisma separado, sem Railway)
+- Tailwind CSS + shadcn/ui para todos os componentes de UI
+- Resend para todos os e-mails transacionais
+- jsPDF + html2canvas para geração de PDF (sem Puppeteer)
+- Nuvem Fiscal API para emissão de NFS-e
+
+## Código
+- TypeScript estrito em todos os arquivos (sem "any")
+- Validar todos os inputs com Zod antes de qualquer operação
+- Usar Supabase RLS para segurança de dados — nunca expor dados de outros usuários
+- Toda chamada à Claude API deve ter try/catch com mensagem amigável ao usuário
+- Componentes atômicos e reutilizáveis: atoms → molecules → organisms
+- Nunca expor chaves de API no frontend (sempre em variáveis de ambiente server-side)
+- Toda rota /api deve verificar autenticação Supabase antes de processar
+
+## Commits (em português)
+- feat: nova funcionalidade
+- fix: correção de bug
+- chore: configuração, dependências
+- docs: documentação
+- style: formatação sem mudança de lógica
+- refactor: refatoração sem nova feature
+
+## Variáveis de ambiente necessárias
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+ANTHROPIC_API_KEY=
+RESEND_API_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NUVEM_FISCAL_CLIENT_ID=
+NUVEM_FISCAL_CLIENT_SECRET=
+NEXT_PUBLIC_APP_URL=https://lexrocha.com.br
+
+## Ordem de desenvolvimento
+Sempre aguardar confirmação do fundador antes de avançar ao próximo módulo.
+Módulo atual em andamento deve ser concluído antes de iniciar o próximo.

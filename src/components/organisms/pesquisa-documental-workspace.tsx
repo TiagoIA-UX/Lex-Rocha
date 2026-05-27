@@ -307,7 +307,7 @@ export function PesquisaDocumentalWorkspace() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card px-4 py-4 md:px-8">
+      <header className="border-b bg-card px-3 py-4 sm:px-4 md:px-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <Link
@@ -324,7 +324,7 @@ export function PesquisaDocumentalWorkspace() {
             </h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{AVISO_LEGAL_TELA}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex w-full flex-wrap gap-2 sm:w-auto">
             <Button type="button" variant="outline" size="sm" asChild>
               <Link href="/pesquisa-documental/fila">Fila de pedidos</Link>
             </Button>
@@ -528,7 +528,7 @@ export function PesquisaDocumentalWorkspace() {
               )}
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="prose prose-slate max-w-none whitespace-pre-wrap rounded-lg border bg-card p-4 text-sm">
+              <div className="prose prose-slate max-w-none whitespace-pre-wrap break-words rounded-lg border bg-card p-3 text-sm sm:p-4">
                 {conteudoGerado}
               </div>
               <div className="flex flex-wrap gap-3">
@@ -563,7 +563,7 @@ export function PesquisaDocumentalWorkspace() {
       </main>
 
       {modalPagamento && relatorioId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-3 sm:p-4">
           <Card className="w-full max-w-md">
             <CardHeader>
               <CardTitle className="text-lg">Controle financeiro</CardTitle>
@@ -609,7 +609,7 @@ export function PesquisaDocumentalWorkspace() {
                 >
                   {gerandoLinkStripe ? "Gerando link…" : "Gerar link Stripe (cartão / PIX)"}
                 </Button>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row">
                   <Button type="button" className="flex-1" onClick={handleRegistrarPagamento}>
                     Registrar PIX manual
                   </Button>

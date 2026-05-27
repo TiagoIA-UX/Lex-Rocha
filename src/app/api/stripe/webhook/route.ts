@@ -8,6 +8,10 @@ import {
 import { entrarNaFilaAposPagamento } from "@/lib/pedidos/fila-service";
 import { getStripe } from "@/lib/stripe/client";
 import { createAdminClient } from "@/lib/supabase/admin";
+import {
+  avisarPagamentoCheckoutWhatsApp,
+  linkFallbackWhatsAppPagamento,
+} from "@/lib/whatsapp/sender";
 
 export const runtime = "nodejs";
 
@@ -64,6 +68,12 @@ export async function POST(request: Request) {
         emailCliente: session.customer_email ?? session.customer_details?.email ?? undefined,
       });
 
+      void avisarPagamentoCheckoutWhatsApp({
+        referencia: fila.referencia,
+        valor: valorPago,
+        codigo: fila.codigo,
+      });
+
       await Promise.all([
         alertarFundadorPagamentoConfirmado({
           referencia: fila.referencia,
@@ -81,6 +91,15 @@ export async function POST(request: Request) {
             })
           : Promise.resolve(false),
       ]);
+
+      console.info(
+        "[stripe/webhook] fallback whatsapp link",
+        linkFallbackWhatsAppPagamento({
+          referencia: fila.referencia,
+          valor: valorPago,
+          codigo: fila.codigo,
+        })
+      );
     }
   }
 

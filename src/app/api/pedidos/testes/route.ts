@@ -5,10 +5,24 @@ import { stripeConfigurado } from "@/lib/stripe/client";
 import { calcularPrevisaoEntrega } from "@/lib/pedidos/previsao-entrega";
 import { contarFilaAtiva } from "@/lib/pedidos/fila-service";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { diagnosticoWhatsAppCheckout } from "@/lib/whatsapp/sender";
 
 export const runtime = "nodejs";
 
 const WORKSPACE_COOKIE = "lex_workspace";
+const CHECK_TIMEOUT_MS = 8000;
+
+async function comTimeout<T>(promise: Promise<T>, label: string): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`Timeout em ${label}`)), CHECK_TIMEOUT_MS);
+  });
+  try {
+    return await Promise.race([promise, timeout]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
 
 function autorizado(): boolean {
   const secret = process.env.WORKSPACE_SECRET;
@@ -46,6 +60,7 @@ export async function GET() {
       ? "Resend configurado (e-mails ativos)"
       : "RESEND_API_KEY ausente — alertas só no painel",
   };
+  checks.whatsappCheckout = diagnosticoWhatsAppCheckout();
   checks.supabase = {
     ok: Boolean(
       process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -58,13 +73,15 @@ export async function GET() {
 
   try {
     const supabase = createAdminClient();
-    filaAtiva = await contarFilaAtiva();
+    filaAtiva = await comTimeout(contarFilaAtiva(), "contarFilaAtiva");
 
-    const { error: errSol } = await supabase.from("solicitacoes_pesquisa").select("id").limit(1);
-    const { error: errRel } = await supabase
-      .from("relatorios_pesquisa")
-      .select("codigo_acompanhamento")
-      .limit(1);
+    const [{ error: errSol }, { error: errRel }] = await comTimeout(
+      Promise.all([
+        supabase.from("solicitacoes_pesquisa").select("id").limit(1),
+        supabase.from("relatorios_pesquisa").select("codigo_acompanhamento").limit(1),
+      ]),
+      "validação de tabelas Supabase"
+    );
 
     if (errSol || errRel) {
       tabelasOk = false;

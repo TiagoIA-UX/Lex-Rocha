@@ -27,11 +27,11 @@ export function ModeloRelatorioSection({ compact = false }: { compact?: boolean 
         )}
 
         <Card className="overflow-hidden border-primary/20 shadow-md">
-          <div className="border-b bg-primary px-6 py-4 text-primary-foreground">
+          <div className="border-b bg-primary px-4 py-4 text-primary-foreground sm:px-6">
             <p className="text-xs font-medium uppercase tracking-wider">
               Modelo ilustrativo · dados fictícios
             </p>
-            <p className="font-serif text-xl font-semibold">{MODELO_RELATORIO_META.titulo}</p>
+            <p className="font-serif text-lg font-semibold sm:text-xl">{MODELO_RELATORIO_META.titulo}</p>
             <p className="text-sm opacity-90">
               {MODELO_RELATORIO_META.referencia} · {MODELO_RELATORIO_META.area}
             </p>
@@ -48,7 +48,7 @@ export function ModeloRelatorioSection({ compact = false }: { compact?: boolean 
                   <FileText className="size-4 text-accent" />
                   {sec.titulo}
                 </h3>
-                <div className="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
+                <div className="whitespace-pre-wrap break-words text-sm leading-relaxed text-muted-foreground">
                   {sec.corpo.split("**").map((part, i) =>
                     i % 2 === 1 ? (
                       <strong key={i} className="font-medium text-foreground">

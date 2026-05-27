@@ -47,7 +47,12 @@ export function saveConsent(analytics: boolean): ConsentPreferences {
     decidedAt: new Date().toISOString(),
   };
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  } catch {
+    // Pode falhar em ambientes com storage bloqueado; segue com cookie.
+  }
+
   document.cookie = `${CONSENT_COOKIE_NAME}=${encodeURIComponent(JSON.stringify(prefs))}; path=/; max-age=63072000; SameSite=Lax`;
 
   return prefs;

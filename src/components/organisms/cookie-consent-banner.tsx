@@ -17,6 +17,7 @@ export function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
   const [manageOpen, setManageOpen] = useState(false);
   const [analytics, setAnalytics] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -36,11 +37,19 @@ export function CookieConsentBanner() {
   }, []);
 
   const finalize = useCallback(async (allowAnalytics: boolean) => {
-    saveConsent(allowAnalytics);
-    await syncConsentToServer(allowAnalytics, manageOpen ? "configuracoes" : "banner");
-    setVisible(false);
-    setManageOpen(false);
-  }, [manageOpen]);
+    if (saving) return;
+    setSaving(true);
+
+    try {
+      saveConsent(allowAnalytics);
+      // Fecha imediatamente para evitar sensação de botão travado.
+      setVisible(false);
+      setManageOpen(false);
+      void syncConsentToServer(allowAnalytics, manageOpen ? "configuracoes" : "banner");
+    } finally {
+      setSaving(false);
+    }
+  }, [manageOpen, saving]);
 
   if (!mounted || !visible) return null;
 
@@ -73,6 +82,7 @@ export function CookieConsentBanner() {
                 type="button"
                 variant="outline"
                 className="w-full sm:w-auto"
+                disabled={saving}
                 onClick={() => finalize(false)}
               >
                 Rejeitar todos
@@ -81,12 +91,18 @@ export function CookieConsentBanner() {
                 type="button"
                 variant="outline"
                 className="w-full sm:w-auto"
+                disabled={saving}
                 onClick={() => setManageOpen(true)}
               >
                 Gerenciar preferências
               </Button>
-              <Button type="button" className="w-full sm:w-auto" onClick={() => finalize(true)}>
-                Aceitar todos
+              <Button
+                type="button"
+                className="w-full sm:w-auto"
+                disabled={saving}
+                onClick={() => finalize(true)}
+              >
+                {saving ? "Salvando..." : "Aceitar todos"}
               </Button>
             </div>
           </div>
@@ -122,11 +138,11 @@ export function CookieConsentBanner() {
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Button type="button" variant="outline" onClick={() => finalize(false)}>
+                <Button type="button" variant="outline" disabled={saving} onClick={() => finalize(false)}>
                   Rejeitar analíticos
                 </Button>
-                <Button type="button" onClick={() => finalize(analytics)}>
-                  Salvar preferências
+                <Button type="button" disabled={saving} onClick={() => finalize(analytics)}>
+                  {saving ? "Salvando..." : "Salvar preferências"}
                 </Button>
               </div>
             </CardContent>

@@ -50,7 +50,7 @@ export function mensagemPagamentoConfirmado(dados: {
     `Valor: R$ ${dados.valor.toFixed(2)}`,
     dados.codigo ? `Código: ${dados.codigo}` : null,
     "",
-    "Entrar na fila de produção.",
+    `Verificar e-mail ${SITE.email} para detalhes e próximas ações.`,
   ]
     .filter(Boolean)
     .join("\n");

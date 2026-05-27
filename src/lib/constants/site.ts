@@ -10,7 +10,7 @@ export const SITE = {
   founderTitle: "Fundador",
   city: "Caraguatatuba",
   state: "SP",
-  email: "contato@lexrocha.com.br",
+  email: process.env.CONTACT_EMAIL ?? "contato@lexrocha.com.br",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "5512996887993",
 } as const;
 

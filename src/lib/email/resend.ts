@@ -24,20 +24,27 @@ export async function enviarEmailResend(params: EnviarEmailParams): Promise<bool
   const from = process.env.RESEND_FROM_EMAIL ?? SITE.email;
   const destinatarios = Array.isArray(params.para) ? params.para : [params.para];
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: `Lex Rocha <${from}>`,
-      to: destinatarios,
-      reply_to: params.responderPara,
-      subject: params.assunto,
-      text: params.texto,
-    }),
-  });
+  let res: Response;
+  try {
+    res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: `Lex Rocha <${from}>`,
+        to: destinatarios,
+        reply_to: params.responderPara,
+        subject: params.assunto,
+        text: params.texto,
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch (error) {
+    console.error("[email] timeout/falha de rede no Resend", error);
+    return false;
+  }
 
   if (!res.ok) {
     const err = await res.text();

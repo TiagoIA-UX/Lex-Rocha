@@ -28,7 +28,7 @@ export const COPY_SITE = {
   metadata: {
     defaultTitle: "Lex Rocha — Pesquisa Documental Jurídica",
     description:
-      "Organização de precedentes em portais públicos. Relatório em PDF para apoiar a consulta com advogado OAB. Escopo e valor confirmados antes da cobrança. CNPJ 61.699.939/0001-80.",
+      "Pesquisa de precedentes em portais públicos com organização documental em PDF para apoiar a consulta com advogado OAB. Escopo e valor confirmados antes da cobrança. CNPJ 61.699.939/0001-80.",
     ogDescription:
       "Pesquisa documental com referências verificáveis. Material informativo para discutir com seu advogado — sem substituir representação processual.",
     keywords: [
@@ -58,9 +58,9 @@ export const COPY_SITE = {
   },
   areas: {
     eyebrow: "Escopo",
-    title: "Temas que organizamos em portais públicos",
+    title: "Temas que pesquisamos em portais públicos",
     description:
-      "Cada relatório é produzido conforme o caso descrito na solicitação. Exemplos de áreas recorrentes:",
+      "Usamos portais públicos para pesquisar e organizar precedentes conforme o caso descrito na solicitação. Exemplos de áreas recorrentes:",
     lista: [
       "Relações de consumo e cobranças",
       "Contratos, cancelamentos e renovações",

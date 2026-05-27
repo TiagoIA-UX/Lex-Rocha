@@ -8,6 +8,7 @@ import {
 import { entrarNaFilaAposPagamento } from "@/lib/pedidos/fila-service";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { registrarPagamentoSchema } from "@/lib/validations/pesquisa-documental";
+import { avisarPagamentoCheckoutWhatsApp } from "@/lib/whatsapp/sender";
 
 export const runtime = "nodejs";
 
@@ -41,6 +42,12 @@ export async function POST(request: Request) {
       const fila = await entrarNaFilaAposPagamento({
         relatorioId: dados.relatorioId,
         valor: dados.valorCobrado,
+      });
+
+      void avisarPagamentoCheckoutWhatsApp({
+        referencia: fila.referencia,
+        valor: dados.valorCobrado,
+        codigo: fila.codigo,
       });
 
       await alertarFundadorPagamentoConfirmado({

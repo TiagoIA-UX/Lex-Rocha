@@ -53,7 +53,8 @@ export async function POST(request: Request) {
       );
     }
 
-    await Promise.all([
+    // Não bloquear a resposta do formulário por integração de e-mail externa.
+    void Promise.allSettled([
       alertarFundadorNovaSolicitacao({
         nome: dados.nome,
         email: dados.email,

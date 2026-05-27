@@ -9,7 +9,10 @@ export function getStripe(): Stripe {
   }
 
   if (!stripeClient) {
-    stripeClient = new Stripe(key);
+    stripeClient = new Stripe(key, {
+      timeout: 20000,
+      maxNetworkRetries: 1,
+    });
   }
 
   return stripeClient;

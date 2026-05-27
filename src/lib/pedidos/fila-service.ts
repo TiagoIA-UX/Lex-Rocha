@@ -41,8 +41,19 @@ export async function contarFilaAtiva(): Promise<number> {
 }
 
 export async function proximaPrevisao(faixa: FaixaRelatorio = "padrao"): Promise<Date> {
-  const posicao = (await contarFilaAtiva()) + 1;
-  return calcularPrevisaoEntrega({ posicaoNaFila: posicao, faixa });
+  const { previsao } = await snapshotFila(faixa);
+  return previsao;
+}
+
+/** Uma única leitura da fila — evita round-trips duplicados ao Supabase. */
+export async function snapshotFila(faixa: FaixaRelatorio = "padrao"): Promise<{
+  posicaoFila: number;
+  previsao: Date;
+}> {
+  const ativos = await contarFilaAtiva();
+  const posicaoFila = ativos + 1;
+  const previsao = calcularPrevisaoEntrega({ posicaoNaFila: posicaoFila, faixa });
+  return { posicaoFila, previsao };
 }
 
 export async function garantirCodigoUnico(

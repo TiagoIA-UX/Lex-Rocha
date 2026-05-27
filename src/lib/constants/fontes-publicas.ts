@@ -48,6 +48,12 @@ export const FONTES_PESQUISA_PUBLICA: FontePublica[] = [
     url: "https://www.consumidor.gov.br/",
     tipo: "consumidor",
   },
+  {
+    nome: "ANPD — Autoridade Nacional de Proteção de Dados",
+    descricao: "Normas, orientações e contexto regulatório em proteção de dados pessoais.",
+    url: "https://www.gov.br/anpd/pt-br",
+    tipo: "legislacao",
+  },
 ];
 
 export const NOTA_FONTES_RELATORIO =

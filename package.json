@@ -9,6 +9,8 @@
     "lint": "next lint",
     "test:integracao": "node scripts/test-integracao.mjs",
     "test:copy": "node scripts/test-copy-audit.mjs",
+    "test:copy:estrutura": "node scripts/test-copy-estrutura.mjs",
+    "test:copy:all": "node scripts/test-copy-audit.mjs && node scripts/test-copy-estrutura.mjs",
     "semver:check": "node scripts/semver-check.mjs",
     "release:patch": "npm version patch",
     "release:minor": "npm version minor",

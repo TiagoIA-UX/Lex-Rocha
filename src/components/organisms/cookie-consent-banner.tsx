@@ -5,12 +5,15 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { COPY_SITE } from "@/lib/constants/copy-site";
 import {
   hasConsentDecision,
   readConsent,
   saveConsent,
   syncConsentToServer,
 } from "@/lib/cookies/consent-storage";
+
+const { cookies: copyCookies } = COPY_SITE;
 
 export function CookieConsentBanner() {
   const [mounted, setMounted] = useState(false);
@@ -55,15 +58,15 @@ export function CookieConsentBanner() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-[100] border-t border-border bg-background/95 p-4 shadow-lg backdrop-blur-md"
+      className="mobile-no-blur fixed inset-x-0 bottom-0 z-[100] border-t border-border bg-background p-4 shadow-lg md:bg-background/95 md:backdrop-blur-md"
       role="dialog"
-      aria-label="Preferências de cookies"
+      aria-label={copyCookies.dialogLabel}
     >
       <div className="mx-auto max-w-4xl">
         {!manageOpen ? (
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl space-y-2 text-sm text-muted-foreground">
-              <p className="font-medium text-foreground">Cookies e privacidade</p>
+              <p className="font-medium text-foreground">{copyCookies.title}</p>
               <p>
                 Usamos cookies necessários para o funcionamento do site. Cookies analíticos
                 só são ativados com seu consentimento. Leia a{" "}

@@ -33,11 +33,27 @@ export const PRECEDENTES: Precedente[] = [
     tipo: "legislacao",
   },
   {
-    titulo: "Tema: bloqueio de contas em redes sociais",
+    titulo: "Lei de Software (programas de computador)",
+    tribunal: "Lei nº 9.609/1998",
+    resumo:
+      "Proteção de programas de computador, licenciamento e titularidade em relações de trabalho e contratos de desenvolvimento.",
+    href: "https://www.planalto.gov.br/ccivil_03/leis/l9609.htm",
+    tipo: "legislacao",
+  },
+  {
+    titulo: "Tema: bloqueio de contas em plataformas digitais",
     tribunal: "Tribunais estaduais e STJ",
     resumo:
-      "Jurisprudência recorrente sobre restabelecimento de perfis e contas quando há indícios de abuso ou falha na moderação — consulte decisões atualizadas nos sites dos tribunais.",
+      "Restabelecimento de perfis e contas, falha na moderação e responsabilidade de provedores — decisões atualizadas nos sites dos tribunais.",
     href: "https://www.stj.jus.br/sites/portalp/Inicio",
+    tipo: "jurisprudencia",
+  },
+  {
+    titulo: "Tema: dano moral em proteção de dados",
+    tribunal: "STJ e tribunais estaduais",
+    resumo:
+      "Discussão sobre vazamento de dados, nexo causal e indenização — com distinções entre dados sensíveis e comuns.",
+    href: "https://www.stj.jus.br/",
     tipo: "jurisprudencia",
   },
 ];

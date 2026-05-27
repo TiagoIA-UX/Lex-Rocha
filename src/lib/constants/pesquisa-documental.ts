@@ -18,14 +18,16 @@ export const NOTA_APROVACAO_CLIENTE =
 
 export const CHAVE_PIX_CNPJ = "61.699.939/0001-80";
 
+/** Alinhado a COPY_CATEGORIAS_DIGITAL em copy-site.ts */
 export const AREAS_PROBLEMA = [
-  "Bloqueio/suspensão de conta digital",
-  "Cancelamento indevido de serviço",
-  "Cobrança indevida/cartão/banco",
+  "LGPD — vazamento ou uso indevido de dados",
+  "Bloqueio/suspensão de conta em app ou rede social",
+  "Cobrança ou falha em serviço digital (app, fintech)",
+  "Contrato digital / SaaS — cancelamento ou rescisão",
+  "Cancelamento indevido de serviço (não digital)",
   "Negativação indevida (SPC/Serasa)",
-  "Falha em produto ou entrega",
   "Plano de saúde negando cobertura",
-  "Demissão / direitos trabalhistas",
+  "Trabalho com uso de apps/plataformas",
   "INSS / benefício negado",
   "Outro",
 ] as const;

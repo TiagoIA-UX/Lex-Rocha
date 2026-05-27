@@ -64,6 +64,24 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply overflow-x-hidden bg-background text-foreground antialiased;
+  }
+
+  /*
+   * Chrome Android costuma corromper seções seguintes quando há blur/filter
+   * em camadas absolutas grandes (artefato de faixas coloridas).
+   */
+  @media (max-width: 768px) {
+    .gpu-safe-section {
+      isolation: isolate;
+      transform: translateZ(0);
+    }
+
+    .mobile-no-blur {
+      filter: none !important;
+      -webkit-filter: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
   }
 }

@@ -5,11 +5,7 @@ import {
   alertarFundadorNovaSolicitacao,
   emailClienteSolicitacaoRecebida,
 } from "@/lib/email/resend";
-import {
-  contarFilaAtiva,
-  garantirCodigoUnico,
-  proximaPrevisao,
-} from "@/lib/pedidos/fila-service";
+import { garantirCodigoUnico, snapshotFila } from "@/lib/pedidos/fila-service";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { solicitacaoPesquisaSchema } from "@/lib/validations/solicitacao";
 
@@ -21,9 +17,10 @@ export async function POST(request: Request) {
     const dados = solicitacaoPesquisaSchema.parse(body);
     const supabase = createAdminClient();
 
-    const codigo = await garantirCodigoUnico("solicitacoes_pesquisa");
-    const previsao = await proximaPrevisao("padrao");
-    const posicaoFila = (await contarFilaAtiva()) + 1;
+    const [{ posicaoFila, previsao }, codigo] = await Promise.all([
+      snapshotFila("padrao"),
+      garantirCodigoUnico("solicitacoes_pesquisa"),
+    ]);
 
     const { data, error } = await supabase
       .from("solicitacoes_pesquisa")

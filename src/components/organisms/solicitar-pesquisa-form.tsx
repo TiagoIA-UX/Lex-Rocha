@@ -53,6 +53,7 @@ export function SolicitarPesquisaForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
+        signal: AbortSignal.timeout(20_000),
       });
       const json = (await res.json()) as {
         erro?: string;
@@ -64,7 +65,11 @@ export function SolicitarPesquisaForm() {
       setPrevisaoEntrega(json.previsaoEntrega ?? null);
       setEnviado(true);
     } catch (err) {
-      setErro(err instanceof Error ? err.message : "Erro inesperado.");
+      if (err instanceof Error && err.name === "TimeoutError") {
+        setErro("A conexão demorou demais. Verifique sua internet e tente novamente.");
+      } else {
+        setErro(err instanceof Error ? err.message : "Erro inesperado.");
+      }
     } finally {
       setEnviando(false);
     }

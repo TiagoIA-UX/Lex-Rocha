@@ -76,6 +76,7 @@ export async function syncConsentToServer(
         origem,
         revogacao,
       }),
+      signal: AbortSignal.timeout(8_000),
     });
   } catch {
     // Falha silenciosa — preferências locais permanecem válidas

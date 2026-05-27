@@ -31,7 +31,8 @@ export function AcompanharPedido({ codigoInicial = "" }: { codigoInicial?: strin
 
     try {
       const res = await fetch(
-        `/api/pedidos/acompanhar?codigo=${encodeURIComponent(codigo.trim())}`
+        `/api/pedidos/acompanhar?codigo=${encodeURIComponent(codigo.trim())}`,
+        { signal: AbortSignal.timeout(15_000) }
       );
       const json = (await res.json()) as StatusPedido & { erro?: string };
       if (!res.ok) throw new Error(json.erro ?? "Pedido não encontrado.");

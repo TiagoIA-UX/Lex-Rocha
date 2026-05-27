@@ -16,9 +16,12 @@ export function HeroSection() {
   const footnote = copyComSite(hero.footnote, { essencial: PRECIFICACAO.essencial.valor });
 
   return (
-    <section className="relative overflow-hidden border-b bg-gradient-to-b from-background via-background to-secondary/40">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent" />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:items-center md:px-6 md:py-24">
+    <section className="gpu-safe-section relative isolate overflow-hidden border-b bg-background md:bg-gradient-to-b md:from-background md:via-background md:to-secondary/40">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent md:block"
+      />
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:items-center md:px-6 md:py-24">
         <div className="space-y-6">
           <Badge variant="accent" className="gap-1">
             <BookOpen className="size-3.5" />
@@ -49,8 +52,11 @@ export function HeroSection() {
           </div>
           <p className="text-xs text-muted-foreground">{footnote}</p>
         </div>
-        <div className="relative mx-auto w-full max-w-md">
-          <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 blur-2xl" />
+        <div className="relative mx-auto w-full max-w-md md:overflow-visible">
+          <div
+            aria-hidden
+            className="mobile-no-blur absolute -inset-4 hidden rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 blur-2xl md:block"
+          />
           <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl">
             <Image
               src="/images/founder/tiago-rocha.jpg"

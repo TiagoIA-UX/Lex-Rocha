@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <>
       <SiteHeader />
-      <main>
+      <main className="overflow-x-hidden">
         <HeroSection />
         <AreasAtendidasSection />
         <HowItWorksSection />

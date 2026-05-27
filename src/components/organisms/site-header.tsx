@@ -6,7 +6,7 @@ import { NAV_LINKS } from "@/lib/constants/site";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
+    <header className="mobile-no-blur sticky top-0 z-50 border-b border-border/60 bg-background md:bg-background/90 md:backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-4 md:px-6">
         <Logo showTagline />
         <nav className="hidden items-center gap-6 md:flex">

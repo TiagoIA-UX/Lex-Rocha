@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { updateSession } from "@/lib/supabase/middleware";
+import { rotaPublicaSemAuth, updateSession } from "@/lib/supabase/middleware";
 
 const WORKSPACE_COOKIE = "lex_workspace";
 
@@ -51,7 +51,9 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  registrarAcesso(request);
+  if (!rotaPublicaSemAuth(pathname)) {
+    registrarAcesso(request);
+  }
   return await updateSession(request);
 }
 

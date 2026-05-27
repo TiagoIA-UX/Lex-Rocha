@@ -7,8 +7,8 @@ export function AreasAtendidasSection() {
   const { areas } = COPY_SITE;
 
   return (
-    <section className="scroll-mt-20 bg-background py-16">
-      <div className="mx-auto max-w-6xl space-y-8 px-4 md:px-6">
+    <section className="gpu-safe-section relative isolate scroll-mt-20 bg-background py-16">
+      <div className="relative z-10 mx-auto max-w-6xl space-y-8 px-4 md:px-6">
         <SectionHeading
           eyebrow={areas.eyebrow}
           title={areas.title}
@@ -18,9 +18,9 @@ export function AreasAtendidasSection() {
           {areas.lista.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2 rounded-lg border border-border/80 bg-card/50 px-4 py-3 text-sm text-muted-foreground"
+              className="flex items-start gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm text-muted-foreground"
             >
-              <Check className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden />
+              <Check className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
               <span>{item}</span>
             </li>
           ))}

@@ -2,6 +2,24 @@
 
 Todas as mudanças relevantes do projeto seguem [Semantic Versioning](https://semver.org/lang/pt-BR/) e este arquivo.
 
+## [Unreleased]
+
+### Adicionado
+
+- Prompt mestre de adaptação neurocomportamental: `docs/PROMPT_ADAPTACAO_NEUROCOMPORTAMENTAL.md`
+- Testes de estrutura de copy: `npm run test:copy:estrutura`, `npm run test:copy:all`
+- `COPY_CATEGORIAS_DIGITAL` e taxonomia nicho TI (LGPD, plataformas, consumo digital)
+- Fonte ANPD em `fontes-publicas.ts`; precedentes Lei 9.609/98 e dano moral em dados
+
+### Alterado
+
+- Copy pública alinhada ao nicho direito digital / TI (hero, escopo, SEO, formulário)
+- `AREAS_PROBLEMA` sincronizado com categorias digitais
+- Banner de cookies usando `COPY_SITE.cookies`
+- Middleware: rotas B2C públicas sem refresh Supabase Auth (menos latência)
+- Supabase admin com fetch timeout; formulário `/solicitar` com timeout de 20s
+- API solicitar: uma leitura de fila + código em paralelo (menos round-trips)
+
 ## [1.0.0] - 2026-05-27
 
 ### Adicionado

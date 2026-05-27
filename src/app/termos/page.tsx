@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { Logo } from "@/components/atoms/logo";
+import { LegalDocLayout } from "@/components/legal/legal-doc-layout";
+import { TEXTO_JURISDICAO_BRASILEIRA } from "@/lib/constants/lgpd";
 import { SITE } from "@/lib/constants/site";
 
 export const metadata = {
@@ -9,28 +10,25 @@ export const metadata = {
 
 export default function TermosPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b px-4 py-4 md:px-6">
-        <Logo />
-      </header>
-      <article className="prose prose-slate mx-auto max-w-3xl px-4 py-12 md:px-6">
-        <h1>Termos de uso</h1>
-        <p>
-          A {SITE.name} oferece <strong>triagem jurídica informativa</strong> com
-          apoio de inteligência artificial. Não substitui consulta com advogado
-          habilitado nem constitui relação advocatícia.
-        </p>
-        <p>
-          Na fase MVP, relatórios iniciais são gratuitos. Cobrança e planos
-          comerciais serão comunicados previamente.
-        </p>
-        <p>
-          Dúvidas: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-        </p>
-        <p>
-          <Link href="/">← Voltar</Link>
-        </p>
-      </article>
-    </div>
+    <LegalDocLayout title="Termos de uso">
+      <p>
+        A {SITE.name} oferece <strong>pesquisa e organização documental</strong> de
+        jurisprudência pública, com referência a portais como Jusbrasil, CNJ e tribunais.
+        Não substitui consulta com advogado habilitado na OAB nem constitui relação
+        advocatícia.
+      </p>
+      <p>
+        Valores e escopo são combinados com o cliente antes da pesquisa. O orçamento só
+        é confirmado após essa etapa.
+      </p>
+      <p>{TEXTO_JURISDICAO_BRASILEIRA}</p>
+      <p>
+        Privacidade: <Link href="/privacidade">Política de Privacidade</Link> ·{" "}
+        <Link href="/cookies">Política de Cookies</Link>
+      </p>
+      <p>
+        Dúvidas: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </p>
+    </LegalDocLayout>
   );
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 
+import { CookieConsentBanner } from "@/components/organisms/cookie-consent-banner";
+import { COPY_SITE } from "@/lib/constants/copy-site";
+
 import "./globals.css";
 
 const inter = Inter({
@@ -17,31 +20,25 @@ const sourceSerif = Source_Serif_4({
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://lexrocha.com.br";
 
+const { metadata: copyMeta } = COPY_SITE;
+
 export const metadata: Metadata = {
   title: {
-    default: "Lex Rocha — Triagem Jurídica Inteligente",
+    default: copyMeta.defaultTitle,
     template: "%s | Lex Rocha",
   },
-  description:
-    "Triagem jurídica com IA para direito do consumidor digital. Bloqueios no WhatsApp/Meta, LGPD e falhas de serviço. Relatório gratuito na fase MVP.",
+  description: copyMeta.description,
   metadataBase: new URL(appUrl),
-  keywords: [
-    "direito do consumidor digital",
-    "bloqueio WhatsApp",
-    "LGPD",
-    "triagem jurídica",
-    "LegalTech Brasil",
-  ],
+  keywords: [...copyMeta.keywords],
   authors: [{ name: "Tiago Aureliano da Rocha" }],
-  creator: "Lex Rocha Tecnologia Jurídica",
+  creator: "Lex Rocha — Pesquisa de Jurisprudência",
   openGraph: {
     type: "website",
     locale: "pt_BR",
     url: appUrl,
     siteName: "Lex Rocha",
-    title: "Lex Rocha — Triagem Jurídica Inteligente",
-    description:
-      "Saiba se você tem direito após bloqueio em plataforma digital. Triagem gratuita na fase MVP.",
+    title: copyMeta.defaultTitle,
+    description: copyMeta.ogDescription,
     images: [
       {
         url: "/images/founder/tiago-rocha.jpg",
@@ -53,9 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lex Rocha — Triagem Jurídica Inteligente",
-    description:
-      "Triagem jurídica com IA para consumidor digital. Relatório gratuito na fase MVP.",
+    title: copyMeta.defaultTitle,
+    description: copyMeta.ogDescription,
     images: ["/images/founder/tiago-rocha.jpg"],
   },
   robots: {
@@ -75,6 +71,7 @@ export default function RootLayout({
         className={`${inter.variable} ${sourceSerif.variable} font-sans antialiased`}
       >
         {children}
+        <CookieConsentBanner />
       </body>
     </html>
   );

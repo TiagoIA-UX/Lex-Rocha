@@ -10,16 +10,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { COPY_SITE } from "@/lib/constants/copy-site";
 import { PRECEDENTES } from "@/lib/data/precedentes";
 
 export function PrecedentesSection() {
+  const { precedentes } = COPY_SITE;
+
   return (
     <section id="precedentes" className="scroll-mt-20 py-20">
       <div className="mx-auto max-w-6xl space-y-12 px-4 md:px-6">
         <SectionHeading
-          eyebrow="Base jurídica"
-          title="Fundamentos e precedentes verificáveis"
-          description="Links públicos para legislação e portais oficiais dos tribunais — sem inventar números de processo."
+          eyebrow={precedentes.eyebrow}
+          title={precedentes.title}
+          description={precedentes.description}
         />
         <div className="grid gap-4 md:grid-cols-2">
           {PRECEDENTES.map((item) => (
@@ -32,7 +35,7 @@ export function PrecedentesSection() {
                   <Gavel className="size-4 text-muted-foreground" />
                 </div>
                 <CardTitle className="text-lg leading-snug">{item.titulo}</CardTitle>
-                <CardDescription className="font-medium text-foreground/70">
+                <CardDescription className="font-medium text-foreground/90">
                   {item.tribunal}
                 </CardDescription>
               </CardHeader>

@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --background: 210 40% 98%;
-    --foreground: 215 50% 12%;
+    --foreground: 215 55% 10%;
     --card: 0 0% 100%;
     --card-foreground: 215 50% 12%;
     --popover: 0 0% 100%;
@@ -15,9 +15,11 @@
     --secondary: 210 30% 94%;
     --secondary-foreground: 213 65% 16%;
     --muted: 210 25% 92%;
-    --muted-foreground: 215 16% 42%;
-    --accent: 43 72% 47%;
-    --accent-foreground: 213 65% 12%;
+    --muted-foreground: 215 18% 28%;
+    /* Dourado para botões/fundos — não usar como cor de texto em fundo claro */
+    --accent: 40 72% 38%;
+    --accent-foreground: 45 70% 98%;
+    --accent-bright: 43 78% 58%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     --border: 214 24% 88%;
@@ -26,7 +28,7 @@
     --chart-1: 213 65% 16%;
     --chart-2: 43 72% 47%;
     --chart-3: 173 58% 39%;
-    --chart-4: 215 16% 42%;
+    --chart-4: 215 18% 28%;
     --chart-5: 0 72% 51%;
     --radius: 0.5rem;
   }
@@ -43,9 +45,11 @@
     --secondary: 215 35% 18%;
     --secondary-foreground: 210 40% 98%;
     --muted: 215 35% 18%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 43 72% 47%;
-    --accent-foreground: 213 65% 12%;
+    --muted-foreground: 210 25% 78%;
+    /* Dourado para botões/fundos — não usar como cor de texto em fundo claro */
+    --accent: 40 72% 38%;
+    --accent-foreground: 45 70% 98%;
+    --accent-bright: 43 78% 58%;
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
     --border: 215 35% 22%;

@@ -16,7 +16,7 @@ export function Logo({ className, showTagline = false }: LogoProps) {
       </span>
       {showTagline && (
         <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          Tecnologia Jurídica
+          Pesquisa de Jurisprudência
         </span>
       )}
     </Link>

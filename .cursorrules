@@ -1,42 +1,90 @@
-# Lex Rocha — Cursor AI Rules
+# PROMPT MESTRE V3 — LEX-ROCHA (Cursor AI)
+# Versão corrigida e verificada — Mai/2026
 
-## Stack obrigatória
-- Next.js 14 com App Router e TypeScript strict
-- Supabase para banco, auth e storage (sem Prisma separado, sem Railway)
-- Tailwind CSS + shadcn/ui para todos os componentes de UI
-- Resend para todos os e-mails transacionais
-- jsPDF + html2canvas para geração de PDF (sem Puppeteer)
-- Nuvem Fiscal API para emissão de NFS-e
+---
 
-## Código
-- TypeScript estrito em todos os arquivos (sem "any")
-- Validar todos os inputs com Zod antes de qualquer operação
-- Usar Supabase RLS para segurança de dados — nunca expor dados de outros usuários
-- Toda chamada à Claude API deve ter try/catch com mensagem amigável ao usuário
-- Componentes atômicos e reutilizáveis: atoms → molecules → organisms
-- Nunca expor chaves de API no frontend (sempre em variáveis de ambiente server-side)
-- Toda rota /api deve verificar autenticação Supabase antes de processar
+## IDENTIDADE REAL DO PROJETO
 
-## Commits (em português)
-- feat: nova funcionalidade
-- fix: correção de bug
-- chore: configuração, dependências
-- docs: documentação
-- style: formatação sem mudança de lógica
-- refactor: refatoração sem nova feature
+**Nome do sistema:** Lex-Rocha
+**Nome do serviço ao público:** Pesquisa de Jurisprudência / Análise de Precedentes
+  (NÃO usar: LegalTech, Tecnologia Jurídica, Consultoria Jurídica, Assistência Jurídica)
 
-## Variáveis de ambiente necessárias
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-ANTHROPIC_API_KEY=
-RESEND_API_KEY=
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
-NUVEM_FISCAL_CLIENT_ID=
-NUVEM_FISCAL_CLIENT_SECRET=
-NEXT_PUBLIC_APP_URL=https://lexrocha.com.br
+**Fundador:** Tiago Aureliano da Rocha — Pesquisador de Jurisprudência
+**CNPJ:** 61.699.939/0001-80
+**Site:** lexrocha.com.br
 
-## Ordem de desenvolvimento
-Sempre aguardar confirmação do fundador antes de avançar ao próximo módulo.
-Módulo atual em andamento deve ser concluído antes de iniciar o próximo.
+**O que o sistema faz:**
+Organiza e formata relatórios de pesquisa de precedentes jurídicos públicos.
+O Tiago pesquisa manualmente nos sistemas públicos (Jusbrasil, CNJ, tribunais).
+O sistema apenas estrutura, classifica por triagem e gera o relatório final em PDF.
+
+**O que o sistema NÃO faz:**
+- Não presta consultoria jurídica
+- Não orienta sobre qual ação entrar
+- Não representa ninguém judicialmente
+- Não promete resultado
+- Não substitui advogado
+
+---
+
+## DOIS PRODUTOS — DESENVOLVER NESTA ORDEM
+
+### PRODUTO 1 — TRIAGEM E RELATÓRIO PARA CIDADÃOS (B2C)
+Gera caixa imediato. Desenvolver primeiro.
+
+### PRODUTO 2 — TRIAGEM DE PETIÇÕES PARA ESCRITÓRIOS (B2B)
+NÃO desenvolver até o Produto 1 estar funcionando e gerando receita.
+Áreas-alvo: consumidor, trabalhista, previdenciário.
+Modelo: assinatura mensal R$ 300–800. Sem comissão por caso (vedado OAB Art. 34, IV).
+
+---
+
+## STACK TÉCNICA
+
+| Camada       | Tecnologia                                          |
+|--------------|-----------------------------------------------------|
+| Frontend     | Next.js 14 (App Router), TypeScript, Tailwind, shadcn/ui |
+| Backend      | Supabase (PostgreSQL + Auth + Storage + RLS)        |
+| IA principal | Anthropic Claude API (claude-sonnet-4-20250514)     |
+| IA triagem   | Groq API — APENAS textos sem dados pessoais         |
+| PDF output   | jsPDF                                               |
+| E-mail       | Resend                                              |
+| Deploy       | Vercel                                              |
+
+### REGRA CRÍTICA DE USO DAS APIs:
+- **Groq API:** classificar tipo de caso e valor estimado com base no texto que TIAGO digitou.
+  NUNCA enviar: nome do cliente, CPF, RG, número de processo, documentos anexados ou PII.
+- **Claude API:** relatório final completo. SEMPRE via API Route no servidor.
+
+---
+
+## MÓDULO 1 — TRIAGEM + RELATÓRIO (Produto 1)
+
+Fluxo: formulário → triagem Groq → confirmação → relatório Claude → preview → PDF → pagamento Supabase.
+
+Aviso legal obrigatório em toda tela e PDF (`src/lib/constants/pesquisa-documental.ts`).
+
+**NÃO iniciar Módulo 2 sem confirmação do Tiago.**
+
+---
+
+## REGRAS INEGOCIÁVEIS
+
+1. Groq: NUNCA recebe PII — apenas área + resumo dos fatos digitado pelo Tiago
+2. Claude: sempre API Route, nunca no cliente
+3. Aviso legal em TODA tela e TODO PDF
+4. Nunca usar: "recomendo", "você deve", "vai ganhar", "consultoria", "orientação jurídica", "assistência jurídica"
+5. NUNCA citar "IA", "Claude", "Groq" no site, PDFs ou textos ao cliente
+6. Confirmar com Tiago antes de Módulo 2
+7. Loading states em operações assíncronas
+8. Mobile-first
+
+---
+
+## O QUE NÃO FAZER
+
+- ❌ Claude no frontend
+- ❌ Termos de consultoria em saídas
+- ❌ Módulo 2 antes do Módulo 1 funcional
+- ❌ Inventar precedentes
+- ❌ Reintroduzir stack Python/Streamlit sem confirmação

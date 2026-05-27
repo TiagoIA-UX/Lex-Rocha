@@ -14,7 +14,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="text-sm font-medium text-foreground/85 transition-colors hover:text-primary"
             >
               {link.label}
             </Link>
@@ -22,10 +22,13 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+            <Link href="/acompanhar">Acompanhar</Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm" className="hidden md:inline-flex">
             <Link href="/parceiro">Sou advogado</Link>
           </Button>
           <Button asChild size="sm">
-            <Link href="/triagem">Análise gratuita</Link>
+            <Link href="/solicitar">Solicitar pesquisa</Link>
           </Button>
         </div>
       </div>

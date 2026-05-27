@@ -11,13 +11,21 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { COPY_SITE } from "@/lib/constants/copy-site";
 import { SITE } from "@/lib/constants/site";
+
+const { parceiro } = COPY_SITE;
 
 export const metadata = {
   title: "Lista de espera — Escritórios parceiros",
-  description:
-    "Cadastre-se na lista de espera da Lex Rocha. Carteira de leads qualificados em direito do consumidor digital em breve.",
+  description: parceiro.intro,
 };
+
+const beneficiosParceiro = [
+  "Leads com pesquisa documental e resumo do caso já estruturados",
+  "Menos tempo de triagem inicial no escritório",
+  "Programa comercial em estruturação — vagas limitadas por região",
+] as const;
 
 export default function ParceiroPage() {
   return (
@@ -27,35 +35,27 @@ export default function ParceiroPage() {
       </header>
       <main className="mx-auto max-w-2xl px-4 py-12 md:px-6 md:py-16">
         <Badge variant="accent" className="mb-4">
-          Rede em construção
+          {parceiro.badge}
         </Badge>
         <h1 className="font-serif text-3xl font-bold text-primary md:text-4xl">
-          Lista de espera para escritórios parceiros
+          {parceiro.title}
         </h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Ainda não exibimos parceiros com OAB na plataforma. Estamos validando a
-          qualidade dos relatórios e da triagem antes de abrir a{" "}
-          <strong>carteira de leads qualificados</strong>.
-        </p>
+        <p className="mt-4 text-lg text-muted-foreground">{parceiro.intro}</p>
 
         <Card className="mt-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 font-serif">
-              <Briefcase className="size-5 text-accent" />
-              O que virá para parceiros
+              <Briefcase className="size-5 text-primary" />
+              Benefícios previstos
             </CardTitle>
             <CardDescription>
-              Planos previstos (Fase 2): R$ 297–997/mês conforme volume de leads.
+              Modelo comercial em definição. Entre em contato para manifestar interesse.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            {[
-              "Leads com relatório de viabilidade gerado por IA",
-              "Casos de consumidor digital pré-filtrados",
-              "Dashboard com métricas de conversão",
-            ].map((item) => (
+            {beneficiosParceiro.map((item) => (
               <p key={item} className="flex items-start gap-2 text-sm">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent" />
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
                 {item}
               </p>
             ))}
@@ -64,8 +64,8 @@ export default function ParceiroPage() {
 
         <div className="mt-8 rounded-lg border bg-secondary/40 p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Cadastro de parceiros com autenticação Supabase será habilitado no{" "}
-            <strong>Módulo 6</strong>. Por enquanto, entre em contato:
+            Cadastro automatizado de parceiros será habilitado em fase posterior. Por
+            enquanto, utilize o e-mail institucional:
           </p>
           <Button asChild className="mt-4" size="lg">
             <a href={`mailto:${SITE.email}?subject=Lista%20de%20espera%20parceiro%20Lex%20Rocha`}>

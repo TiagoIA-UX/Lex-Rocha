@@ -1,54 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AlertTriangle, ArrowRight, Scale } from "lucide-react";
+import { ArrowRight, BookOpen, Scale } from "lucide-react";
 
+import { WhatsAppButton } from "@/components/atoms/whatsapp-button";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { copyComSite } from "@/lib/constants/copy-helpers";
+import { COPY_SITE } from "@/lib/constants/copy-site";
+import { PRECIFICACAO } from "@/lib/constants/pesquisa-documental";
 import { SITE } from "@/lib/constants/site";
 
 export function HeroSection() {
+  const { hero } = COPY_SITE;
+  const msgWhatsapp = copyComSite(hero.whatsappMensagem);
+  const footnote = copyComSite(hero.footnote, { essencial: PRECIFICACAO.essencial.valor });
+
   return (
     <section className="relative overflow-hidden border-b bg-gradient-to-b from-background via-background to-secondary/40">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent" />
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:items-center md:px-6 md:py-24">
         <div className="space-y-6">
           <Badge variant="accent" className="gap-1">
-            <Scale className="size-3.5" />
-            MVP — primeiros relatórios gratuitos
+            <BookOpen className="size-3.5" />
+            {hero.badge}
           </Badge>
           <h1 className="font-serif text-4xl font-bold leading-tight tracking-tight text-primary md:text-5xl lg:text-[3.25rem]">
-            Bloqueado no WhatsApp ou em outra plataforma?{" "}
-            <span className="text-accent">Saiba se você tem direito.</span>
+            {hero.title}{" "}
+            <span className="text-primary underline decoration-accent decoration-2 underline-offset-4">
+              {hero.titleHighlight}
+            </span>
           </h1>
-          <p className="max-w-xl text-lg text-muted-foreground">
-            Triagem jurídica com inteligência artificial, fundamentada no CDC,
-            Marco Civil e LGPD. Relatório estruturado gratuito na fase de
-            validação — sem promessas vazias, com transparência total.
-          </p>
-          <div className="flex items-start gap-2 rounded-lg border border-accent/30 bg-accent/5 p-3 text-sm text-foreground">
-            <AlertTriangle className="mt-0.5 size-4 shrink-0 text-accent" />
-            <p>
-              <strong>Urgência real:</strong> prazos para acionar judicialmente
-              podem estar correndo. Quanto antes você organizar as provas,
-              melhor.
-            </p>
-          </div>
+          <p className="max-w-xl text-lg leading-relaxed text-foreground/90">{hero.lead}</p>
+          <p className="max-w-xl text-base text-muted-foreground">{hero.scope}</p>
+          <p className="text-xs font-medium text-primary/90">{hero.disclaimer}</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg" className="gap-2">
-              <Link href="/triagem">
-                Fui lesado — quero análise gratuita
+              <Link href="/solicitar">
+                {hero.ctaPrimary}
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="/parceiro">Sou advogado — lista de espera</Link>
+              <Link href="/modelo-relatorio">{hero.ctaSecondary}</Link>
             </Button>
+            <WhatsAppButton mensagem={msgWhatsapp} size="lg" variant="outline">
+              {hero.ctaWhatsapp}
+            </WhatsAppButton>
           </div>
-          <p className="text-xs text-muted-foreground">
-            Consulta jurídica presencial costuma custar{" "}
-            <span className="line-through">R$ 300–500</span>. Na fase MVP, a
-            triagem inicial é gratuita.
-          </p>
+          <p className="text-xs text-muted-foreground">{footnote}</p>
         </div>
         <div className="relative mx-auto w-full max-w-md">
           <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 blur-2xl" />
@@ -62,12 +61,15 @@ export function HeroSection() {
               priority
             />
             <div className="border-t bg-card p-4">
-              <p className="font-semibold text-primary">{SITE.founder}</p>
+              <p className="flex items-center gap-2 font-semibold text-primary">
+                <Scale className="size-4 text-primary" />
+                {SITE.founder}
+              </p>
               <p className="text-sm text-muted-foreground">
                 {SITE.founderTitle} · {SITE.legalName}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                Caraguatatuba/SP · CNPJ {SITE.cnpj}
+                {SITE.city}/{SITE.state} · CNPJ {SITE.cnpj}
               </p>
             </div>
           </div>

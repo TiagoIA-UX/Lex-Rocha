@@ -1,45 +1,40 @@
-import { Building2, HeartHandshake, ShieldCheck, Sparkles } from "lucide-react";
+import { Building2, HandCoins, ShieldCheck, BookMarked, Clock } from "lucide-react";
 
 import { SectionHeading } from "@/components/atoms/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
+import { COPY_SITE } from "@/lib/constants/copy-site";
+import { PRECIFICACAO } from "@/lib/constants/pesquisa-documental";
+import { CAPACIDADE_OPERACIONAL } from "@/lib/pedidos/capacidade";
 
-const pillars = [
-  {
-    icon: HeartHandshake,
-    title: "Reciprocidade real",
-    text: "Primeiros relatórios gratuitos na fase MVP. Você recebe valor antes de qualquer cobrança.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Transparência institucional",
-    text: "CNPJ publicado, fundador identificado e políticas de privacidade claras. Sem números inventados.",
-  },
-  {
-    icon: Building2,
-    title: "Carteira de parceiros em construção",
-    text: "Ainda não exibimos escritórios com OAB — estamos validando a qualidade dos leads antes de abrir a rede.",
-  },
-  {
-    icon: Sparkles,
-    title: "IA como apoio, não substituto",
-    text: "A triagem orienta; a decisão estratégica continua com advogado habilitado quando você optar por seguir.",
-  },
-] as const;
+const icons = [HandCoins, Clock, ShieldCheck, BookMarked, Building2] as const;
 
 export function TrustSection() {
+  const { trust } = COPY_SITE;
+
+  const pillars = trust.pillars.map((pillar, i) => {
+    let text: string = pillar.text;
+    if (i === 0) {
+      text = `Faixas a partir de R$ ${PRECIFICACAO.essencial.valor}. ${pillar.text}`;
+    }
+    if (i === 1) {
+      text = `Até ${CAPACIDADE_OPERACIONAL.maxRelatoriosPorDia} relatórios por dia útil na operação atual. ${pillar.text}`;
+    }
+    return { ...pillar, text, icon: icons[i] ?? ShieldCheck };
+  });
+
   return (
     <section id="confianca" className="scroll-mt-20 bg-secondary/30 py-20">
       <div className="mx-auto max-w-6xl space-y-12 px-4 md:px-6">
         <SectionHeading
-          eyebrow="Por que confiar"
-          title="Construímos credibilidade com fatos, não com marketing vazio"
-          description="Sem depoimentos fabricados nem contador inflado de casos. Honestidade é parte do produto."
+          eyebrow={trust.eyebrow}
+          title={trust.title}
+          description={trust.description}
         />
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((pillar) => (
             <Card key={pillar.title} className="bg-card/80">
               <CardContent className="flex gap-4 p-6">
-                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-primary">
                   <pillar.icon className="size-5" />
                 </div>
                 <div>

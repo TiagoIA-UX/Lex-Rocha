@@ -1,6 +1,6 @@
 # Lex Rocha
 
-**Lex Rocha Tecnologia Jurídica** — plataforma LegalTech de triagem jurídica inteligente com IA.
+**Lex Rocha Tecnologia Jurídica** — pesquisa documental de precedentes em portais públicos, com relatório informativo para o cidadão levar ao advogado.
 
 - **Domínio:** [lexrocha.com.br](https://lexrocha.com.br)
 - **Fundador:** Tiago Aureliano da Rocha
@@ -12,9 +12,9 @@
 |--------|------------|
 | Frontend | Next.js 14 (App Router), TypeScript, Tailwind, shadcn/ui |
 | Backend | Supabase (PostgreSQL, Auth, Storage) |
-| IA | Anthropic Claude API |
+| Organização de texto | Anthropic Claude API (somente servidor) |
 | E-mail | Resend |
-| PDF | jsPDF + html2canvas (cliente) |
+| PDF | jsPDF (cliente) |
 | Deploy | Vercel |
 
 ## Setup local
@@ -22,49 +22,67 @@
 ```bash
 npm install
 cp .env.local.example .env.local
-# Preencha as variáveis do Supabase em .env.local
+# Preencha Supabase e ANTHROPIC_API_KEY em .env.local
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000).
+Ou no Windows:
 
-## Estrutura de pastas
+```powershell
+.\scripts\iniciar-dev.ps1
+```
+
+Abra **http://localhost:3000** (não use porta 8501 — era o painel antigo, removido).
+
+Ferramenta interna do fundador: **http://localhost:3000/pesquisa-documental**
+
+## Estrutura
 
 ```
 src/
-├── app/              # Rotas App Router
+├── app/                    # Rotas (landing, pesquisa-documental, APIs)
 ├── components/
-│   ├── ui/           # shadcn/ui
-│   ├── atoms/
-│   ├── molecules/
-│   └── organisms/
-├── hooks/
 ├── lib/
-│   └── supabase/     # client, server, admin, middleware
+│   ├── anthropic/
+│   ├── constants/
+│   └── supabase/
 └── types/
-supabase/             # Migrations e docs do banco
+supabase/migrations/      # SQL — rodar no painel Supabase
+docs/MODULO_A_PESQUISA_DOCUMENTAL.md
 ```
 
 ## Variáveis de ambiente
 
-Veja `.env.local.example` para a lista completa.
+Veja `.env.local.example`.
 
-## Módulos de desenvolvimento
+## Módulo ativo
 
-| # | Módulo | Status |
-|---|--------|--------|
-| 1 | Configuração inicial | ✅ Concluído |
-| 2 | Schema Supabase + RLS | ✅ Ativo no Supabase |
-| 3 | Landing page | ✅ Concluído |
-| 4 | Wizard de triagem | Pendente |
-| 4+ | Ver prompt mestre | Pendente |
+| Módulo | Descrição |
+|--------|-----------|
+| A — Pesquisa documental | Landing B2C + workspace interno + PDF |
+
+Módulos B (B2G) e C (similaridade) só após confirmação do fundador.
 
 ## Deploy (Vercel)
 
 1. Conecte o repositório GitHub à Vercel.
-2. Configure as variáveis de ambiente no dashboard da Vercel.
-3. Aponte o domínio `lexrocha.com.br` via DNS no Registro.br.
+2. Configure as variáveis de ambiente.
+3. Aponte `lexrocha.com.br` no DNS.
 
----
+## SemVer e release
 
-*Aguardar confirmação do fundador antes de avançar cada módulo.*
+- Versão atual em `package.json` e histórico em `CHANGELOG.md`.
+- Política de versionamento: `docs/SEMVER.md`.
+- Validação rápida de consistência:
+
+```bash
+npm run semver:check
+```
+
+- Comandos de release:
+
+```bash
+npm run release:patch
+npm run release:minor
+npm run release:major
+```

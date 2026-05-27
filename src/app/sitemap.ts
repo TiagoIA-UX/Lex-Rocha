@@ -8,10 +8,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     {
-      url: `${base}/triagem`,
+      url: `${base}/solicitar`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${base}/acompanhar`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${base}/modelo-relatorio`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${base}/parceiro`,
@@ -21,6 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${base}/privacidade`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${base}/cookies`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,

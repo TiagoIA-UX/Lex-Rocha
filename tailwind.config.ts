@@ -35,6 +35,7 @@ const config: Config = {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          bright: "hsl(var(--accent-bright))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -52,7 +53,7 @@ const config: Config = {
         },
         lex: {
           navy: "#0f2744",
-          gold: "#c9a227",
+          gold: "#a67b1a",
           slate: "#64748b",
         },
       },

@@ -23,7 +23,8 @@ export function createAdminClient() {
       persistSession: false,
     },
     global: {
-      fetch: (input, init) => fetchWithTimeout(input, { ...init, timeoutMs: 12_000 }),
+      fetch: (input, init) =>
+        fetchWithTimeout(input, { ...init, timeoutMs: 25_000, retries: 2 }),
     },
   });
 }

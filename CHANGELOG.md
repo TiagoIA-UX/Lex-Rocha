@@ -8,6 +8,7 @@ Todas as mudanças relevantes do projeto seguem [Semantic Versioning](https://se
 
 - Prompt mestre de adaptação neurocomportamental: `docs/PROMPT_ADAPTACAO_NEUROCOMPORTAMENTAL.md`
 - Testes de estrutura de copy: `npm run test:copy:estrutura`, `npm run test:copy:all`
+- Suíte completa: `npm run test:all` e diagnóstico direto `npm run test:supabase`
 - `COPY_CATEGORIAS_DIGITAL` e taxonomia nicho TI (LGPD, plataformas, consumo digital)
 - Fonte ANPD em `fontes-publicas.ts`; precedentes Lei 9.609/98 e dano moral em dados
 
@@ -19,6 +20,7 @@ Todas as mudanças relevantes do projeto seguem [Semantic Versioning](https://se
 - Middleware: rotas B2C públicas sem refresh Supabase Auth (menos latência)
 - Supabase admin com fetch timeout; formulário `/solicitar` com timeout de 20s
 - API solicitar: uma leitura de fila + código em paralelo (menos round-trips)
+- Supabase fetch com retentativas e timeout 25s; erros de insert mais claros em dev
 
 ## [1.0.0] - 2026-05-27
 

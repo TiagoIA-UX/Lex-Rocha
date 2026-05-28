@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 /**
  * Testes de integração locais (requer `npm run dev` em outro terminal).
- * Uso: node scripts/test-integracao.mjs
+ * Uso: npm run test:integracao
  */
 
 const BASE = process.env.TEST_BASE_URL ?? "http://localhost:3000";
-const TIMEOUT_MS = Number(process.env.TEST_TIMEOUT_MS ?? 15_000);
+const TIMEOUT_MS = Number(process.env.TEST_TIMEOUT_MS ?? 25_000);
+
+const falhas = [];
 
 async function req(path, options = {}) {
   const url = `${BASE}${path}`;
@@ -24,6 +26,7 @@ async function req(path, options = {}) {
 
 function log(nome, passou, detalhe = "") {
   console.log(`${passou ? "✓" : "✗"} ${nome}${detalhe ? ` — ${detalhe}` : ""}`);
+  if (!passou) falhas.push(nome);
 }
 
 async function verificarServidor() {
@@ -41,7 +44,7 @@ async function main() {
   if (!(await verificarServidor())) {
     console.error(
       `✗ Servidor indisponível em ${BASE} (timeout ${TIMEOUT_MS}ms).\n` +
-        "  Inicie em outro terminal: npm run dev   (ou npm run build && npm run start)\n"
+        "  Inicie em outro terminal: .\\scripts\\iniciar-dev.ps1\n"
     );
     process.exit(1);
   }
@@ -121,16 +124,22 @@ async function main() {
   log(
     "Diagnóstico workspace /testes",
     testes.status === 200 || testes.status === 401,
-    testes.status === 401 ? "protegido (OK)" : JSON.stringify(testes.body?.checks ?? {}).slice(0, 80)
+    testes.status === 401 ? "protegido (OK)" : JSON.stringify(testes.body?.checks ?? {}).slice(0, 120)
   );
 
   console.log("\nStripe/webhook e e-mail real exigem chaves + stripe listen.\n");
+
+  if (falhas.length) {
+    console.error(`✗ ${falhas.length} teste(s) falharam. Rode: npm run test:supabase\n`);
+    process.exit(1);
+  }
 }
 
 main().catch((e) => {
   if (e?.name === "TimeoutError" || e?.code === "UND_ERR_HEADERS_TIMEOUT") {
     console.error(
-      `✗ Timeout ao conectar em ${BASE}. Reinicie o dev server (npm run dev) e tente de novo.`
+      `✗ Timeout ao conectar em ${BASE}. Reinicie o dev server e tente de novo.\n` +
+        "  Se POST /solicitar falhar com migrations OK: npm run test:supabase\n"
     );
   } else {
     console.error(e);

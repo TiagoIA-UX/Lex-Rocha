@@ -5,6 +5,7 @@ import {
   alertarFundadorNovaSolicitacao,
   emailClienteSolicitacaoRecebida,
 } from "@/lib/email/resend";
+import { mensagemErroRegistro } from "@/lib/api/erro-registro";
 import { garantirCodigoUnico, snapshotFila } from "@/lib/pedidos/fila-service";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { solicitacaoPesquisaSchema } from "@/lib/validations/solicitacao";
@@ -43,8 +44,12 @@ export async function POST(request: Request) {
       console.error("[pesquisa-documental/solicitar]", error);
       return NextResponse.json(
         {
-          erro:
-            "Não foi possível registrar a solicitação. Execute as migrations 006 e 007 no Supabase.",
+          erro: mensagemErroRegistro(
+            "Falha ao registrar solicitação",
+            error?.message,
+            "Não foi possível registrar a solicitação. Verifique a conexão com o banco ou contate o suporte."
+          ),
+          codigoErro: process.env.NODE_ENV === "development" ? error?.code : undefined,
         },
         { status: 500 }
       );

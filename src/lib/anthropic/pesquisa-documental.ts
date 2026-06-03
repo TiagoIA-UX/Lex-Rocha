@@ -1,10 +1,12 @@
 import Anthropic from "@anthropic-ai/sdk";
 
 import {
+  getModeloOrganizacaoInterno,
+  getPromptSistemaPesquisa,
+} from "@/lib/constants/pesquisa-documental.ip.server";
+import {
   AVISO_LEGAL_RELATORIO,
   labelFundamento,
-  MODELO_ORGANIZACAO_INTERNO,
-  PROMPT_SISTEMA_PESQUISA,
   type ResultadoTriagem,
 } from "@/lib/constants/pesquisa-documental";
 import type { PesquisaDocumentalInput } from "@/lib/validations/pesquisa-documental";
@@ -16,7 +18,7 @@ function montarPromptUsuario(dados: PesquisaDocumentalInput): string {
 
   const t = dados.triagem;
 
-  return `${PROMPT_SISTEMA_PESQUISA}
+  return `${getPromptSistemaPesquisa()}
 
 DADOS:
 Área: ${dados.area}
@@ -27,22 +29,19 @@ Fundamentos selecionados:
 Triagem interna: área ${t.classificacao_interna.area}, subárea ${t.classificacao_interna.subarea}, urgência ${t.classificacao_interna.grau_urgencia}, complexidade ${t.analise_fatores.complexidade}, faixa da causa ${t.analise_fatores.faixa_estimada_causa}, via interna ${t.analise_fatores.via_sugerida_referencia_interna}, risco prescricional ${t.analise_fatores.risco_prescricao_evidente ? "sim" : "não"}
 Observações: ${dados.observacoes ?? "Nenhuma"}
 
-Gere exatamente estas 5 seções (títulos em MAIÚSCULAS, nesta ordem, sem markdown):
+Gere exatamente estas 4 seções:
 
-1. RESUMO EXECUTIVO DOS FATOS
-(3 a 4 parágrafos, linguagem objetiva e formal, sem julgamento)
+1. RESUMO DOS FATOS
+(3 a 4 parágrafos descrevendo cronologicamente os fatos relatados, linguagem objetiva e formal, sem julgamento)
 
-2. LINHA DO TEMPO
-(Lista numerada com marcos cronológicos dos fatos relatados)
+2. PRECEDENTES JURISPRUDENCIAIS IDENTIFICADOS
+(Para cada precedente fornecido: tribunal, data, valor se houver, resumo do decidido — sem inventar)
 
 3. FUNDAMENTOS JURÍDICOS APLICÁVEIS
 (Para cada fundamento selecionado: artigo, lei e relação com os fatos — sem opinar sobre resultado)
 
-4. PRECEDENTES JURISPRUDENCIAIS IDENTIFICADOS
-(Para cada precedente fornecido: tribunal, data, resumo e link quando houver — sem inventar)
-
-5. SÍNTESE PARA REUNIÃO COM ADVOGADO(A)
-(Contexto neutro do cenário jurisprudencial. Deixe claro o que o relatório NÃO faz: não indica se deve ajuizar ação, pedidos ou probabilidade de êxito)
+4. CONSIDERAÇÕES FINAIS
+(Neutras. Contextualizar o caso no cenário identificado na pesquisa. Sem prever resultado ou recomendar ação)
 
 Termine com exatamente este texto:
 ---
@@ -61,7 +60,7 @@ export async function gerarRelatorioPesquisaDocumental(
   const prompt = montarPromptUsuario(dados);
 
   const response = await client.messages.create({
-    model: MODELO_ORGANIZACAO_INTERNO,
+    model: getModeloOrganizacaoInterno(),
     max_tokens: 4096,
     messages: [{ role: "user", content: prompt }],
   });
@@ -73,7 +72,7 @@ export async function gerarRelatorioPesquisaDocumental(
 
   return {
     conteudo: blocoTexto.text.trim(),
-    modelo: MODELO_ORGANIZACAO_INTERNO,
+    modelo: getModeloOrganizacaoInterno(),
     tokens: {
       entrada: response.usage.input_tokens,
       saida: response.usage.output_tokens,

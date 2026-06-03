@@ -1,12 +1,12 @@
+import { getPromptClassificadorTriagem } from "@/lib/constants/pesquisa-documental.ip.server";
 import {
-  PROMPT_CLASSIFICADOR_TRIAGEM,
   type ResultadoTriagem,
   resultadoTriagemSchema,
 } from "@/lib/constants/pesquisa-documental";
 import { contemDadosPessoais } from "@/lib/validations/pesquisa-documental";
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODELO_TRIAGEM = process.env.GROQ_MODEL ?? "llama-3.3-70b-versatile";
+const MODELO_TRIAGEM = "llama-3.3-70b-versatile";
 
 export async function classificarCasoTriagem(input: {
   area: string;
@@ -23,7 +23,7 @@ export async function classificarCasoTriagem(input: {
     );
   }
 
-  const prompt = PROMPT_CLASSIFICADOR_TRIAGEM.replace("{area}", input.area).replace(
+  const prompt = getPromptClassificadorTriagem().replace("{area}", input.area).replace(
     "{fatos_resumo}",
     input.fatosResumo
   );

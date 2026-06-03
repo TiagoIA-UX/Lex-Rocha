@@ -1,0 +1,10 @@
+{
+  "modeloOrganizacaoInterno": "[MODELO_CLAUDE]",
+  "precificacao": {
+    "essencial": { "label": "Essencial", "valor": 0, "descricao": "[PREENCHER]", "maxPrecedentes": 2 },
+    "padrao": { "label": "Padrão", "valor": 0, "descricao": "[PREENCHER]", "maxPrecedentes": 5 },
+    "completo": { "label": "Completo", "valor": 0, "descricao": "[PREENCHER]", "maxPrecedentes": 99 }
+  },
+  "promptClassificadorTriagem": "[PREENCHER — prompt Groq confidencial]",
+  "promptSistemaPesquisa": "[PREENCHER — prompt relatório confidencial]"
+}

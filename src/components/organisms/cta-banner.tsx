@@ -11,20 +11,30 @@ export function CtaBanner() {
   const msg = copyComSite(cta.whatsappMensagem);
 
   return (
-    <section className="py-20">
-      <div className="mx-auto max-w-4xl px-4 text-center md:px-6">
-        <h2 className="font-serif text-3xl font-bold text-primary md:text-4xl">{cta.title}</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">{cta.description}</p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button asChild size="lg" className="gap-2">
-            <Link href="/solicitar">
-              {cta.primary}
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
-          <WhatsAppButton mensagem={msg} size="lg">
-            WhatsApp
-          </WhatsAppButton>
+    <section className="px-4 py-20 md:px-6">
+      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-accent/25 bg-[#071D31] px-6 py-16 text-center shadow-xl md:px-10">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(43_72%_47%/_0.18),_transparent_60%)]"
+        />
+        <div className="relative z-10">
+          <h2 className="font-serif text-3xl font-bold text-accent-foreground md:text-4xl">
+            {cta.title}
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/80">
+            {cta.description}
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg" variant="accent" className="gap-2">
+              <Link href="/solicitar">
+                {cta.primary}
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+            <WhatsAppButton mensagem={msg} size="lg">
+              WhatsApp
+            </WhatsAppButton>
+          </div>
         </div>
       </div>
     </section>

@@ -18,8 +18,18 @@ export default function TermosPage() {
         advocatícia.
       </p>
       <p>
-        Valores e escopo são combinados com o cliente antes da pesquisa. O orçamento só
-        é confirmado após essa etapa.
+        Os valores e o escopo são apresentados ao cliente <strong>antes de qualquer
+        pagamento</strong>, para que decida qual opção é a ideal para o seu caso. Nenhum
+        valor é cobrado sem essa apresentação prévia e a respectiva confirmação.
+      </p>
+      <p>
+        <strong>Casos sem precedente comparável.</strong> Se a pesquisa não localizar, nos
+        portais públicos consultados, decisão judicial semelhante ao caso já julgada no
+        Brasil, <strong>não haverá cobrança</strong>. Ainda assim, o cliente recebe o material
+        efetivamente pesquisado e os fundamentos legais aplicáveis, com o cenário explicado de
+        forma clara. A ausência de precedente comparável é uma constatação da pesquisa
+        documental e <strong>não constitui avaliação de mérito, parecer, aconselhamento
+        jurídico nem garantia de qualquer resultado</strong>.
       </p>
       <p>{TEXTO_JURISDICAO_BRASILEIRA}</p>
       <p>

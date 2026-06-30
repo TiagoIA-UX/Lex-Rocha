@@ -16,10 +16,21 @@ import {
 const ROOT = join(import.meta.dirname, "..");
 const COPY_SITE_PATH = join(ROOT, "src", "lib", "constants", "copy-site.ts");
 const PESQUISA_PATH = join(ROOT, "src", "lib", "constants", "pesquisa-documental.ts");
+const PESQUISA_SHARED_PATH = join(
+  ROOT,
+  "src",
+  "lib",
+  "constants",
+  "pesquisa-documental.shared.ts"
+);
 const COMPONENTS_DIR = join(ROOT, "src", "components", "organisms");
 
 const copySite = readFileSync(COPY_SITE_PATH, "utf8");
-const pesquisa = readFileSync(PESQUISA_PATH, "utf8");
+// pesquisa-documental.ts hoje apenas reexporta; o domínio vive no .shared.ts
+let pesquisa = readFileSync(PESQUISA_PATH, "utf8");
+if (!pesquisa.includes("AREAS_PROBLEMA") && existsSync(PESQUISA_SHARED_PATH)) {
+  pesquisa = readFileSync(PESQUISA_SHARED_PATH, "utf8");
+}
 
 let falhas = 0;
 
@@ -63,14 +74,14 @@ console.log("\n=== Camada 2: pesquisa-documental + domínio ===\n");
 const areasMatch = pesquisa.match(/AREAS_PROBLEMA = \[([\s\S]*?)\] as const/);
 if (areasMatch) {
   const areas = areasMatch[1];
-  if (areas.includes("LGPD")) ok("AREAS_PROBLEMA inclui LGPD");
-  else fail("AREAS_PROBLEMA sem opção LGPD");
-  if (areas.includes("app") || areas.includes("rede social")) {
-    ok("AREAS_PROBLEMA inclui plataforma digital");
-  } else fail("AREAS_PROBLEMA sem plataforma digital");
-  if (areas.includes("SaaS") || areas.includes("digital")) {
-    ok("AREAS_PROBLEMA inclui contrato digital");
-  } else fail("AREAS_PROBLEMA sem contrato digital");
+  if (areas.includes("conta digital")) ok("AREAS_PROBLEMA inclui conta/plataforma digital");
+  else fail("AREAS_PROBLEMA sem conta/plataforma digital");
+  if (areas.includes("Cobrança") || areas.includes("Cancelamento")) {
+    ok("AREAS_PROBLEMA inclui consumo digital (cobrança/cancelamento)");
+  } else fail("AREAS_PROBLEMA sem consumo digital");
+  if (areas.includes("Plano de saúde") || areas.includes("SPC/Serasa")) {
+    ok("AREAS_PROBLEMA inclui demanda CDC (saúde/negativação)");
+  } else fail("AREAS_PROBLEMA sem demanda CDC");
 } else {
   fail("AREAS_PROBLEMA não encontrado");
 }

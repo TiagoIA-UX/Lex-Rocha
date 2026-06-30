@@ -41,10 +41,10 @@ export const metadata: Metadata = {
     description: copyMeta.ogDescription,
     images: [
       {
-        url: "/images/founder/tiago-rocha.jpg",
-        width: 800,
-        height: 920,
-        alt: "Lex Rocha — Fundador Tiago Aureliano da Rocha",
+        url: "/brand/banner-lex-rocha.png",
+        width: 1024,
+        height: 572,
+        alt: "Lex Rocha — Plataforma Digital · Pesquisa de Jurisprudência · CDC",
       },
     ],
   },
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: copyMeta.defaultTitle,
     description: copyMeta.ogDescription,
-    images: ["/images/founder/tiago-rocha.jpg"],
+    images: ["/brand/banner-lex-rocha.png"],
   },
   robots: {
     index: true,

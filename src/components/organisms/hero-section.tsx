@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Scale } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 
 import { WhatsAppButton } from "@/components/atoms/whatsapp-button";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { copyComSite } from "@/lib/constants/copy-helpers";
 import { COPY_SITE } from "@/lib/constants/copy-site";
 import { PRECIFICACAO } from "@/lib/constants/pesquisa-documental";
-import { SITE } from "@/lib/constants/site";
 
 export function HeroSection() {
   const { hero } = COPY_SITE;
@@ -52,32 +51,25 @@ export function HeroSection() {
           </div>
           <p className="text-xs text-muted-foreground">{footnote}</p>
         </div>
-        <div className="relative mx-auto w-full max-w-md md:overflow-visible">
+        <div className="relative mx-auto w-full max-w-md md:max-w-lg md:overflow-visible">
           <div
             aria-hidden
             className="mobile-no-blur absolute -inset-4 hidden rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 blur-2xl md:block"
           />
-          <div className="relative overflow-hidden rounded-2xl border bg-card shadow-xl">
-            <Image
-              src="/images/founder/tiago-rocha.jpg"
-              alt={`${SITE.founder}, fundador da ${SITE.name}`}
-              width={800}
-              height={920}
-              className="h-auto w-full object-cover object-top"
-              priority
+          <div className="relative overflow-hidden rounded-2xl border border-accent/20 bg-[#071D31] shadow-xl">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(213_60%_18%/_0.6),_transparent_70%)]"
             />
-            <div className="border-t bg-card p-4">
-              <p className="flex items-center gap-2 font-semibold text-primary">
-                <Scale className="size-4 text-primary" />
-                {SITE.founder}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {SITE.founderTitle} · {SITE.legalName}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {SITE.city}/{SITE.state} · CNPJ {SITE.cnpj}
-              </p>
-            </div>
+            <Image
+              src="/brand/banner-lex-rocha.png"
+              alt="Lex Rocha — Plataforma Digital · Pesquisa de Jurisprudência · CDC"
+              width={1024}
+              height={572}
+              priority
+              sizes="(max-width: 768px) 100vw, 32rem"
+              className="relative z-10 h-auto w-full object-contain"
+            />
           </div>
         </div>
       </div>

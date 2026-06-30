@@ -14,7 +14,7 @@ export const AVISO_LEGAL_TELA =
   "Organização de pesquisa em portais públicos. Não substitui advogado. Não é consultoria jurídica.";
 
 export const NOTA_APROVACAO_CLIENTE =
-  "O orçamento e o escopo são confirmados com o cliente após a descrição inicial do caso.";
+  "Os valores e o escopo são apresentados para que você decida qual opção é a ideal para o seu caso.";
 
 export const CHAVE_PIX_CNPJ = "61.699.939/0001-80";
 

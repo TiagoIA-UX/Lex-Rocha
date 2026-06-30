@@ -1,12 +1,14 @@
 {
   "name": "lex-rocha",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:integracao": "node scripts/test-integracao.mjs",
     "test:copy": "node scripts/test-copy-audit.mjs",
     "test:copy:estrutura": "node scripts/test-copy-estrutura.mjs",
@@ -46,6 +48,7 @@
     "postcss": "^8",
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.6"
   }
 }

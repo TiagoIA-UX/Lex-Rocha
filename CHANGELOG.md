@@ -4,23 +4,32 @@ Todas as mudanças relevantes do projeto seguem [Semantic Versioning](https://se
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-30
+
 ### Adicionado
 
-- Prompt mestre de adaptação neurocomportamental: `docs/PROMPT_ADAPTACAO_NEUROCOMPORTAMENTAL.md`
-- Testes de estrutura de copy: `npm run test:copy:estrutura`, `npm run test:copy:all`
-- Suíte completa: `npm run test:all` e diagnóstico direto `npm run test:supabase`
-- `COPY_CATEGORIAS_DIGITAL` e taxonomia nicho TI (LGPD, plataformas, consumo digital)
-- Fonte ANPD em `fontes-publicas.ts`; precedentes Lei 9.609/98 e dano moral em dados
+- Painel administrativo (`/admin`): relatórios, financeiro, solicitações e emissão de NFS-e
+- Autenticação admin: sessão assinada (HMAC-SHA256) + login Google OAuth + allowlist por e-mail
+- Integração NFS-e via Nuvem Fiscal (cliente de API, montagem do DPS e configuração)
+- Exportação financeira/IR em CSV (`/api/admin/export-ir`) e botões no painel financeiro
+- SignalHub BR: captação de leads em fontes públicas com scoring por IA e alertas no Telegram (serviço Python)
+- Branding: novo emblema, banner, favicons e metadados sociais (OG/Twitter)
+- Menu de navegação mobile (hambúrguer acessível) no cabeçalho
+- Política comercial "sem cobrança quando não há precedente comparável" + cláusula nos Termos
+- Protocolo Zero Bug e protocolo de testes por camada (governança de qualidade)
+- `.env.local.example` consolidado com todas as variáveis do projeto
+- Migrations `006_solicitacoes_stripe`, `007_fila_acompanhamento`, `008_nfse_faturacao`
+- Prompt mestre de adaptação neurocomportamental e testes de estrutura de copy (`test:copy:estrutura`, `test:copy:all`)
+- Suíte completa `test:all`, diagnóstico `test:supabase`, `COPY_CATEGORIAS_DIGITAL` e fonte ANPD
 
 ### Alterado
 
-- Copy pública alinhada ao nicho direito digital / TI (hero, escopo, SEO, formulário)
-- `AREAS_PROBLEMA` sincronizado com categorias digitais
-- Banner de cookies usando `COPY_SITE.cookies`
-- Middleware: rotas B2C públicas sem refresh Supabase Auth (menos latência)
-- Supabase admin com fetch timeout; formulário `/solicitar` com timeout de 20s
-- API solicitar: uma leitura de fila + código em paralelo (menos round-trips)
-- Supabase fetch com retentativas e timeout 25s; erros de insert mais claros em dev
+- Copy de planos: "analisamos o caso e apresentamos as opções" (Essencial/Padrão/Completo)
+- Banner movido do topo da home para o card do Hero
+- Cabeçalho com fundo navy em gradiente, logo com emblema e botão "Solicitar" em destaque dourado
+- Copy pública alinhada ao nicho direito digital / consumo (hero, escopo, SEO, formulário)
+- `AREAS_PROBLEMA` sincronizado com categorias digitais; banner de cookies via `COPY_SITE.cookies`
+- Middleware: rotas B2C públicas sem refresh Supabase Auth; timeouts e retentativas de conexão
 
 ## [1.0.0] - 2026-05-27
 

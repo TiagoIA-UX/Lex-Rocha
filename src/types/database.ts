@@ -225,6 +225,11 @@ export type Database = {
           previsao_entrega: string | null;
           fila_status: string;
           solicitacao_id: string | null;
+          nfse_id: string | null;
+          nfse_numero: string | null;
+          nfse_status: string | null;
+          nfse_pdf_url: string | null;
+          nfse_emitida_em: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -255,6 +260,11 @@ export type Database = {
           previsao_entrega?: string | null;
           fila_status?: string;
           solicitacao_id?: string | null;
+          nfse_id?: string | null;
+          nfse_numero?: string | null;
+          nfse_status?: string | null;
+          nfse_pdf_url?: string | null;
+          nfse_emitida_em?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -285,6 +295,11 @@ export type Database = {
           previsao_entrega?: string | null;
           fila_status?: string;
           solicitacao_id?: string | null;
+          nfse_id?: string | null;
+          nfse_numero?: string | null;
+          nfse_status?: string | null;
+          nfse_pdf_url?: string | null;
+          nfse_emitida_em?: string | null;
           created_at?: string;
           updated_at?: string;
         };

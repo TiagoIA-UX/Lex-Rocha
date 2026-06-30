@@ -55,6 +55,27 @@ export function PrecosPesquisaSection() {
             </Card>
           ))}
         </div>
+        <div className="rounded-2xl border border-accent/40 bg-secondary/40 p-6 md:p-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-1.5">
+              <h3 className="font-serif text-xl font-semibold text-primary">
+                {precos.semPrecedentesTitulo}
+              </h3>
+              <p className="max-w-3xl text-sm text-muted-foreground">
+                {precos.semPrecedentesTexto}
+              </p>
+              <Link
+                href="/termos"
+                className="inline-block text-sm font-medium text-primary underline underline-offset-4"
+              >
+                Ver condição nos Termos
+              </Link>
+            </div>
+            <span className="inline-flex shrink-0 items-center self-start rounded-full border border-accent/50 bg-accent/10 px-4 py-1.5 text-sm font-semibold text-primary md:self-center">
+              {precos.semPrecedentesSelo}
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );

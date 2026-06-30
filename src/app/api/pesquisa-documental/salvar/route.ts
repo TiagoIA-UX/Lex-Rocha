@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-import { sugerirValorRelatorio } from "@/lib/constants/pesquisa-documental";
+import { calcularValorSugerido } from "@/lib/constants/pesquisa-documental";
 import {
   garantirCodigoUnico,
   inferirFaixaPorValor,
@@ -18,9 +18,13 @@ export async function POST(request: Request) {
     const dados = salvarRelatorioSchema.parse(body);
 
     const supabase = createAdminClient();
+    const qtdPrecedentes = dados.precedentes
+      .split(/\n+/)
+      .map((linha) => linha.trim())
+      .filter(Boolean).length;
     const valorCobrado =
       dados.valorCobrado ??
-      sugerirValorRelatorio(dados.precedentes, dados.fundamentos.length);
+      calcularValorSugerido(qtdPrecedentes, dados.fundamentos.length);
 
     const t = dados.triagem;
     const urgencia =

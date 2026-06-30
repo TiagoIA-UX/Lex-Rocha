@@ -39,3 +39,16 @@ SUM*RIO*.md
 *.pdf
 Carlo_Acutis.jpg
 Saint_Ivo*.jpg
+# --- segredos (token GitHub / env) ---
+.env
+.env.*
+!.env.example
+.env.local
+
+# --- SignalHub BR / bot (serviço Python, configs e runtime — fora do deploy web) ---
+bot/
+config/
+signalhub-br/
+logs/
+*.log
+*.tmp

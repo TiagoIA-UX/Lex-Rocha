@@ -1,11 +1,17 @@
 /**
  * Textos públicos Lex-Rocha — fonte única de verdade.
  *
+ * Copy alinhado ao modelo juridicamente cuidadoso do Judicial Intelligence,
+ * traduzido para pt-BR e localizado para o Brasil (CDC, Marco Civil, LGPD,
+ * tribunais brasileiros, pagamento em R$).
+ *
  * Estratégia (neurocomportamental · ver docs/PROMPT_ADAPTACAO_NEUROCOMPORTAMENTAL.md):
  * - Clareza cognitiva: uma ideia por bloco.
  * - Hierarquia: valor → processo → metodologia → investimento → ação.
  * - Confiança: escopo, preço e limites antes do clique.
- * - Compromisso progressivo: modelo → solicitar → orçamento → pagamento.
+ * - Conformidade: pesquisa documental informativa; sem aconselhamento, sem
+ *   promessa de resultado; não substitui advogado(a) OAB; não cria relação
+ *   advogado-cliente.
  * - Vertical TI: LGPD, plataformas, consumo e contratos digitais (demanda A1–A4).
  *
  * Regras .cursorrules: sem consultoria, sem prometer resultado, sem “gratuito”/MVP.
@@ -37,11 +43,11 @@ export const COPY_CATEGORIAS_DIGITAL = [
 
 export const COPY_SITE = {
   metadata: {
-    defaultTitle: "Lex Rocha — Pesquisa Documental Jurídica",
+    defaultTitle: "Lex Rocha — Você tem um caso contra uma empresa?",
     description:
-      "Pesquisa de precedentes em portais públicos sobre LGPD, plataformas digitais e consumo online. Relatório em PDF para a consulta com advogado OAB. Escopo e valor confirmados antes da cobrança. CNPJ 61.699.939/0001-80.",
+      "Descreva o que aconteceu. Pesquisamos casos brasileiros semelhantes já decididos e explicamos em linguagem clara. Triagem inicial sem cobrança — você paga apenas se quiser o relatório. Material informativo para a consulta com advogado(a) OAB. CNPJ 61.699.939/0001-80.",
     ogDescription:
-      "Precedentes organizados em fontes públicas verificáveis. Material informativo para discutir com seu advogado — sem substituir representação processual.",
+      "Precedentes organizados em fontes públicas verificáveis sobre LGPD, plataformas digitais e consumo online. Cada relatório é revisado por uma pessoa antes do envio. Material informativo — não substitui advogado(a).",
     keywords: [
       "pesquisa jurisprudência",
       "direito digital",
@@ -54,61 +60,62 @@ export const COPY_SITE = {
     ],
   },
   hero: {
-    badge: "Pesquisa documental · direito digital e consumo",
-    title: "Precedentes organizados",
-    titleHighlight: "para levar à consulta com seu advogado.",
+    badge: "Pesquisa de precedentes · direito do consumidor",
+    title: "Você tem um problema com uma empresa e quer saber",
+    titleHighlight: "se a razão está com você.",
     lead:
-      "Consultamos tribunais e bases públicas sobre o seu caso — LGPD, plataformas, apps e contratos digitais — e entregamos um PDF com referências que você e seu advogado podem conferir.",
+      "Pesquisamos casos reais já decididos no Brasil e explicamos o que aconteceu em situações como a sua — em linguagem que você entende, sem enrolação.",
     scope:
-      "O tema é definido na sua solicitação. Orçamento e escopo fechados por escrito antes de qualquer cobrança.",
+      "A triagem inicial é sem cobrança. Se não encontrarmos casos semelhantes documentados, avisamos antes de qualquer pagamento. Escopo e valor confirmados por escrito.",
     disclaimer:
-      "Material informativo. Não substitui advogado inscrito na OAB nem indica probabilidade de êxito em processo.",
-    ctaPrimary: "Solicitar pesquisa",
-    ctaSecondary: "Ver modelo do relatório",
+      "Material informativo. Não substitui advogado(a) inscrito(a) na OAB nem indica probabilidade de êxito. Pesquisa apenas — sem recomendação ou aconselhamento jurídico.",
+    ctaPrimary: "Descrever meu caso",
+    ctaSecondary: "Ver como funciona",
     ctaWhatsapp: "WhatsApp",
-    footnote: "A partir de R$ {essencial} · orçamento aprovado antes da cobrança · código de acompanhamento",
+    footnote:
+      "Valor exato exibido antes de pagar · a partir de R$ {essencial} · relatório revisado por uma pessoa, normalmente em até 24h úteis",
     whatsappMensagem:
-      "Olá! Acessei o site {domain} e gostaria de solicitar uma Pesquisa de Jurisprudência.",
+      "Olá! Acessei o site {domain} e quero descrever meu caso para uma pesquisa de precedentes.",
   },
   areas: {
-    eyebrow: "Escopo",
-    title: "Temas que pesquisamos em portais públicos",
+    eyebrow: "O que pesquisamos",
+    title: "Situações de consumo que esclarecemos",
     description:
-      "Priorizamos demandas digitais em alta no Judiciário brasileiro. A lista abaixo orienta o pedido — o escopo final segue o que você descrever na solicitação:",
+      "Da cobrança indevida à negativa de garantia — mapeamos o seu caso contra decisões reais já proferidas no Brasil. A lista orienta o pedido; o escopo final segue o que você descrever na solicitação:",
     lista: COPY_CATEGORIAS_DIGITAL.map((c) => c.label),
   },
   howItWorks: {
-    eyebrow: "Processo",
-    title: "Como funciona",
+    eyebrow: "Como funciona",
+    title: "Como funciona — sem surpresas no caminho",
     description:
-      "Três etapas — você sabe o que acontece em cada fase, sem surpresa na cobrança.",
+      "Você sabe o que acontece em cada etapa, sem surpresa na cobrança.",
     steps: [
       {
-        title: "1. Solicitação e escopo",
+        title: "1. Descreva o que aconteceu",
         description:
-          "Você descreve o caso (ex.: conta bloqueada, vazamento de dados). Respondemos com orçamento, prazo e código de acompanhamento. A pesquisa só começa após sua aprovação.",
+          "Sem formulários complicados. Escreva como você contaria a um amigo — cuidamos do resto. Leva cerca de 2 minutos.",
       },
       {
-        title: "2. Pesquisa em fontes públicas",
+        title: "2. Cruzamos o seu caso e mostramos o valor exato",
         description:
-          "Consultamos tribunais, CNJ, legislação federal (CDC, Marco Civil, LGPD) e repositórios de jurisprudência. Cada referência indica origem para conferência.",
+          "Nossas ferramentas de pesquisa consultam decisões públicas brasileiras semelhantes à sua situação. Em seguida você vê o plano recomendado e o valor fixo — sem cobrança até você decidir.",
       },
       {
-        title: "3. Entrega do relatório",
+        title: "3. Revisão humana e entrega",
         description:
-          "PDF com fatos organizados, linha do tempo, fundamentos indicados e links de precedentes — linguagem clara para a reunião com o advogado.",
+          "Após o pagamento, um especialista revisa a pesquisa, confere se corresponde ao seu caso e envia o relatório final por e-mail. O prazo segue a disponibilidade atual, informada antes de pagar.",
       },
     ],
   },
   modelo: {
-    eyebrow: "Formato",
+    eyebrow: "O relatório",
     title: "Modelo ilustrativo do relatório",
     description:
-      "Exemplo com dados fictícios (conta digital / LGPD). O documento contratado contém apenas o que você autorizar.",
+      "Estrutura apenas ilustrativa — o seu relatório é feito para o seu caso, com base em registros públicos reais brasileiros.",
     cta: "Abrir modelo completo",
     pageTitle: "Modelo de relatório",
     pageIntro:
-      "Veja a estrutura da pesquisa: fatos, fundamentos e precedentes públicos. Não é petição nem parecer — material informativo para a reunião com seu advogado.",
+      "Veja o que o relatório inclui: seu caso explicado em linguagem clara, o que o CDC e a legislação dizem sobre a sua situação, casos semelhantes já decididos e o que foi concedido, e as fontes identificadas (tribunal e data). É pesquisa apenas — sem recomendações nem aconselhamento jurídico.",
     ctaSolicitar: "Solicitar pesquisa",
     ctaWhatsapp: "Dúvidas no WhatsApp",
     whatsappMensagem:
@@ -116,113 +123,117 @@ export const COPY_SITE = {
   },
   trust: {
     eyebrow: "Transparência",
-    title: "Por que contratar a pesquisa documental",
+    title: "O que você pode esperar de nós",
     description:
-      "Investimento previsível, metodologia rastreável e entrega pensada para a primeira consulta advocatícia ser mais objetiva.",
+      "Como a inteligência jurídica corporativa: a tecnologia acelera a pesquisa; pessoas revisam e entregam cada relatório.",
     pillars: [
       {
-        title: "Investimento definido no escopo",
-        text: "Faixas publicadas na página de valores. O valor final é confirmado por escrito antes de qualquer cobrança.",
+        title: "Investimento visível antes de pagar",
+        text: "O valor exato aparece antes do pagamento — sem taxas escondidas.",
       },
       {
-        title: "Prazo comunicado na fila",
-        text: "Capacidade operacional limitada. Status consultável pelo código enviado após a solicitação.",
+        title: "Prazo informado antes de pagar",
+        text: "Você vê a disponibilidade atual da fila antes do checkout.",
       },
       {
-        title: "Fontes verificáveis",
-        text: "Precedentes com link ou referência pública. Sem orientação sobre qual ação propor.",
+        title: "Pesquisa, não opiniões",
+        text: "Cruzamos os seus fatos com decisões públicas documentadas — não com achismos de fórum.",
       },
       {
-        title: "Foco em conflitos digitais",
-        text: "Experiência recorrente em LGPD, plataformas e consumo online — fatos e jurisprudência já organizados para o advogado.",
+        title: "Linguagem clara",
+        text: "Explicamos o que a lei diz e o que casos semelhantes obtiveram — fatos, sem aconselhamento.",
       },
       {
-        title: "Rede de parceiros (futuro)",
-        text: "Programa em estruturação para encaminhamento a escritórios, após validação do formato do relatório.",
+        title: "Se não houver base, a gente avisa",
+        text: "Se não houver base documentada suficiente para o seu caso, dizemos isso — mesmo que signifique não receber.",
       },
     ],
   },
   fontes: {
-    eyebrow: "Metodologia",
-    title: "Fontes públicas utilizadas",
+    eyebrow: "Transparência",
+    title: "Fontes públicas que consultamos",
     description:
-      "Toda pesquisa aponta referências conferíveis pelo cliente ou pelo advogado responsável pelo caso.",
+      "Pesquisamos informações documentadas de direito do consumidor — não opiniões de fóruns. Cada referência pode ser conferida por você ou pelo advogado responsável pelo caso.",
   },
   precos: {
-    eyebrow: "Valores",
-    title: "Investimento por faixa de escopo",
+    eyebrow: "Como definimos o plano",
+    title: "Analisamos o seu caso e apresentamos as opções.",
     description:
-      "Referências para planejamento. O orçamento definitivo é confirmado por escrito antes da pesquisa.",
+      "Você descreve o que aconteceu e nós pesquisamos. Conforme o que o seu caso comporta, apresentamos o plano adequado — Essencial, Padrão ou Completo. O valor exato aparece antes de qualquer pagamento. Pagamento em R$ via Stripe · serviço informativo (ver Termos).",
     linkModelo: "Ver modelo ilustrativo (dados fictícios)",
+    semPrecedentesSelo: "R$ 0 · sem cobrança",
+    semPrecedentesTitulo: "Caso inédito? Sem precedente comparável no Brasil, você não paga.",
+    semPrecedentesTexto:
+      "Se a nossa pesquisa não localizar decisão semelhante à sua já julgada no Brasil, não há cobrança. Mesmo assim, você recebe o que foi pesquisado e os fundamentos legais aplicáveis, com o cenário explicado de forma clara.",
   },
   precedentes: {
-    eyebrow: "Referência",
-    title: "Exemplos de fundamentos consultados",
+    eyebrow: "O que você recebe",
+    title: "Um relatório que responde às perguntas certas",
     description:
-      "Ilustrações de legislação e temas recorrentes em tribunais. Cada relatório contratado cita apenas o que foi efetivamente pesquisado.",
+      "Casos reais já decididos em situações semelhantes à sua, com o que foi efetivamente concedido (reembolsos, indenizações, cancelamentos) — relatado como pesquisa, nunca como promessa ou recomendação.",
   },
   parceiros: {
-    eyebrow: "B2B",
-    title: "Escritórios e investidores",
+    eyebrow: "Programa de parceiros",
+    title: "Advogados e defensores do consumidor",
     description:
-      "Lista de espera para parcerias de encaminhamento. Clientes chegam com pesquisa documental já organizada.",
+      "Resumos de casos estruturados e relatórios de pesquisa — para a sua equipe gastar menos tempo na triagem inicial.",
     cards: [
       {
-        title: "Leads com contexto",
-        text: "Menos triagem inicial: precedentes e resumo do caso já estruturados em conflitos digitais.",
+        title: "Casos pré-triados",
+        text: "Os clientes chegam com fatos estruturados e a pesquisa de casos semelhantes já feita.",
       },
       {
-        title: "Vagas por região",
-        text: "Rede em formação, com limite de parceiros por cidade e especialidade na abertura.",
+        title: "Foco regional",
+        text: "Priorizamos regiões onde a nossa pesquisa é mais consistente.",
       },
       {
-        title: "Manifestar interesse",
-        text: "Advogados com OAB ativa e investidores do setor jurídico podem entrar na lista de espera.",
+        title: "Escopo claro",
+        text: "Relatórios informativos apenas — você mantém a representação e a estratégia.",
       },
     ],
-    badge: "Parcerias em estruturação",
-    cta: "Lista de espera",
+    badge: "Lista de espera — vagas limitadas por região",
+    cta: "Entrar na lista de espera",
   },
   cta: {
-    title: "Próximo passo: descrever seu caso",
+    title: "Pronto para saber onde o seu caso está?",
     description:
-      "Formulário ou WhatsApp. Confirmamos escopo e valor antes de iniciar a pesquisa em portais públicos.",
-    primary: "Solicitar pesquisa",
+      "Comece pela triagem sem cobrança — nenhum pagamento até você escolher um plano.",
+    primary: "Começar triagem",
     whatsappMensagem:
-      "Olá! Gostaria de solicitar uma Pesquisa de Jurisprudência — vim pelo site {domain}.",
+      "Olá! Gostaria de descrever meu caso para uma pesquisa de precedentes — vim pelo site {domain}.",
   },
   footer: {
     about:
-      "Pesquisa documental de precedentes em portais públicos, com ênfase em direito digital e consumo online. Material informativo para apoiar a consulta com advogado OAB.",
+      "A Lex Rocha presta pesquisa documental independente e informativa sobre direito do consumidor, com base em registros públicos. Não é escritório de advocacia e não presta aconselhamento jurídico nem representação. Usar este site ou ler um relatório não cria relação advogado-cliente. As leis mudam e cada caso depende dos seus próprios fatos — a decisão final é sempre sua.",
     whatsappMensagem:
-      "Olá! Contato pelo site {domain} — Pesquisa de Jurisprudência.",
+      "Olá! Contato pelo site {domain} — pesquisa de precedentes.",
   },
   solicitar: {
-    title: "Solicitar pesquisa",
+    title: "Descreva seu caso",
     intro:
-      "Descreva o conflito com o detalhe que tiver (conta bloqueada, vazamento, cobrança em app, etc.). Respondemos por e-mail com escopo, prazo e orçamento. Cobrança somente após sua aprovação.",
+      "Conte o que aconteceu com o detalhe que tiver (empresa, datas e o que já tentou). Use suas próprias palavras. A triagem é sem cobrança — você só paga se quiser o relatório, com o valor exato no checkout.",
     sucessoTitulo: "Solicitação recebida",
     sucessoCorpo:
-      "Entraremos em contato no e-mail informado com escopo, prazo e orçamento antes de iniciar a pesquisa.",
+      "Vamos cruzar o seu caso com registros públicos e responder com o plano recomendado, o prazo e o valor exato antes de qualquer cobrança.",
     placeholderDescricao:
-      "Resuma o que aconteceu, a plataforma ou empresa envolvida e o que você já tentou (sem senhas nem dados bancários completos).",
+      "Ex.: Em março comprei online. O produto chegou com defeito. A loja recusa a troca há 3 semanas… (sem senhas nem dados bancários completos).",
     referenciaValores:
       "Faixas de referência: Essencial, Padrão e Completo. O valor final depende do escopo confirmado por escrito.",
   },
   acompanhar: {
     title: "Acompanhar pedido",
     intro:
-      "Informe o código enviado por e-mail após a solicitação ou a confirmação de pagamento.",
+      "Informe o código de 8 caracteres do e-mail de confirmação ou da página de obrigado.",
   },
   parceiro: {
-    badge: "Rede em construção",
+    badge: "Lista de espera — escritórios",
     title: "Lista de espera — escritórios parceiros",
     intro:
-      "Validamos o formato dos relatórios antes de abrir a carteira de encaminhamento. Cadastre interesse para ser contactado na abertura da rede.",
+      "Estamos montando um programa de encaminhamento para advogados que querem casos de consumo já pesquisados. Cadastre o nome do escritório e a região para ser contactado na abertura da rede.",
   },
   whatsappFloat: {
     mensagem:
-      "Olá! Acessei {domain} e gostaria de informações sobre Pesquisa de Jurisprudência.",
+      "Olá! Acessei {domain} e gostaria de informações sobre a pesquisa de precedentes.",
     label: "Falar no WhatsApp",
   },
   cookies: {

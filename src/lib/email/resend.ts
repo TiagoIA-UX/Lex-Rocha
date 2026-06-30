@@ -14,6 +14,13 @@ type EnviarEmailParams = {
   responderPara?: string;
 };
 
+export function resendConfigurado(): boolean {
+  return Boolean(
+    process.env.RESEND_API_KEY?.trim() &&
+      (process.env.RESEND_FROM_EMAIL?.trim() || SITE.email)
+  );
+}
+
 export async function enviarEmailResend(params: EnviarEmailParams): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -146,6 +153,35 @@ export async function emailClientePedidoNaFila(dados: {
       `Previsão de entrega: ${formatarDataPrevisao(dados.previsao)}`,
       "",
       `Acompanhe pelo site: ${base}/acompanhar/${dados.codigo}`,
+      "",
+      "Este material é pesquisa documental informativa — não substitui advogado.",
+      "",
+      SITE.name,
+      SITE.email,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  });
+}
+
+export async function emailRelatorioPronto(dados: {
+  email: string;
+  nome?: string | null;
+  codigo?: string | null;
+  referencia?: string | null;
+}): Promise<boolean> {
+  const base = (process.env.NEXT_PUBLIC_APP_URL ?? SITE.url).replace(/\/$/, "");
+  const primeiroNome = dados.nome?.trim() ? dados.nome.trim().split(" ")[0] : "Olá";
+  return enviarEmailResend({
+    para: dados.email,
+    responderPara: SITE.email,
+    assunto: "Lex Rocha — seu relatório está pronto",
+    texto: [
+      `${primeiroNome},`,
+      "",
+      "Seu relatório de pesquisa documental foi concluído.",
+      dados.referencia ? `Referência: ${dados.referencia}` : null,
+      dados.codigo ? `\nAcesse pelo site: ${base}/acompanhar/${dados.codigo}` : null,
       "",
       "Este material é pesquisa documental informativa — não substitui advogado.",
       "",

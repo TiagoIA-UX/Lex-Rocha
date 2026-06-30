@@ -30,14 +30,13 @@ export const AGRAVANTES_OPCOES = [
 export type AgravanteId = (typeof AGRAVANTES_OPCOES)[number]["id"];
 
 const BASE_CAUSA_POR_AREA: Record<AreaProblema, { min: number; max: number }> = {
-  "LGPD — vazamento ou uso indevido de dados": { min: 3000, max: 15000 },
-  "Bloqueio/suspensão de conta em app ou rede social": { min: 2000, max: 10000 },
-  "Cobrança ou falha em serviço digital (app, fintech)": { min: 1500, max: 8000 },
-  "Contrato digital / SaaS — cancelamento ou rescisão": { min: 2000, max: 12000 },
-  "Cancelamento indevido de serviço (não digital)": { min: 2000, max: 8000 },
+  "Bloqueio/suspensão de conta digital": { min: 2000, max: 10000 },
+  "Cancelamento indevido de serviço": { min: 2000, max: 8000 },
+  "Cobrança indevida/cartão/banco": { min: 1500, max: 8000 },
   "Negativação indevida (SPC/Serasa)": { min: 3000, max: 15000 },
+  "Falha em produto ou entrega": { min: 1500, max: 8000 },
   "Plano de saúde negando cobertura": { min: 5000, max: 20000 },
-  "Trabalho com uso de apps/plataformas": { min: 3000, max: 15000 },
+  "Demissão / direitos trabalhistas": { min: 3000, max: 15000 },
   "INSS / benefício negado": { min: 3000, max: 10000 },
   Outro: { min: 1000, max: 5000 },
 };

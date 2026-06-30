@@ -11,7 +11,7 @@ export const SECOES_RELATORIO_ORDEM = [
   "LINHA DO TEMPO",
   "FUNDAMENTOS JURÍDICOS APLICÁVEIS",
   "PRECEDENTES JURISPRUDENCIAIS IDENTIFICADOS",
-  "SÍNTESE PARA REUNIÃO COM ADVOGADO(A)",
+  "SÍNTESE FINAL",
 ] as const;
 
 /** Aliases de seções antigas (relatórios já gerados) */
@@ -19,7 +19,8 @@ export const ALIASES_SECAO: Record<string, (typeof SECOES_RELATORIO_ORDEM)[numbe
   "RESUMO DOS FATOS": "RESUMO EXECUTIVO DOS FATOS",
   "PRECEDENTES JURISPRUDENCIAIS IDENTIFICADOS": "PRECEDENTES JURISPRUDENCIAIS IDENTIFICADOS",
   "FUNDAMENTOS JURÍDICOS APLICÁVEIS": "FUNDAMENTOS JURÍDICOS APLICÁVEIS",
-  "CONSIDERAÇÕES FINAIS": "SÍNTESE PARA REUNIÃO COM ADVOGADO(A)",
+  "CONSIDERAÇÕES FINAIS": "SÍNTESE FINAL",
+  "SÍNTESE PARA REUNIÃO COM ADVOGADO(A)": "SÍNTESE FINAL",
 };
 
 export function textoDestinatarioFinalidade(referenciaInterna?: string): string {
@@ -28,8 +29,9 @@ export function textoDestinatarioFinalidade(referenciaInterna?: string): string 
     : "identificado pela referência deste relatório.";
 
   return (
-    `Documento preparado para apoio informativo ao(à) advogado(a) que acompanhará o caso do cliente ${ref}\n\n` +
-    "Finalidade: reunir fatos narrados pelo cliente, fundamentos frequentes em demandas similares e precedentes públicos com link para conferência — sem recomendação de estratégia ou prognóstico de êxito."
+    `Relatório de pesquisa documental sobre o caso do solicitante ${ref}\n\n` +
+    "Organizamos, em linguagem clara, os fatos narrados, fundamentos legais frequentes em demandas similares e precedentes públicos com fonte para conferência. " +
+    "O documento é apenas informativo: não indicamos se deve contratar advogado(a), ajuizar ação ou qualquer outro passo — essa decisão é exclusivamente sua."
   );
 }
 

@@ -4,6 +4,14 @@ Todas as mudanças relevantes do projeto seguem [Semantic Versioning](https://se
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-06-30
+
+### Alterado
+
+- Modelo e PDF: destinatário focado no solicitante — sem presumir contratação de advogado(a)
+- Seção final renomeada para "Síntese do que a pesquisa mostrou" (antes: reunião com advogado)
+- Texto de fontes públicas sem encaminhamento implícito a advogado
+
 ## [1.1.1] - 2026-06-30
 
 ### Alterado

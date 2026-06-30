@@ -151,7 +151,7 @@ export const COPY_SITE = {
     eyebrow: "Transparência",
     title: "Fontes públicas que consultamos",
     description:
-      "Pesquisamos informações documentadas de direito do consumidor — não opiniões de fóruns. Cada referência pode ser conferida por você ou pelo advogado responsável pelo caso.",
+      "Pesquisamos informações documentadas de direito do consumidor — não opiniões de fóruns. Cada referência pode ser conferida por você nos portais indicados.",
   },
   precos: {
     eyebrow: "Como definimos o plano",

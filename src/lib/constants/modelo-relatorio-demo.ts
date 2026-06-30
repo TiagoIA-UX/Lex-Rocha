@@ -16,7 +16,7 @@ export const MODELO_RELATORIO_META = {
 export const MODELO_RELATORIO_SECOES = [
   {
     titulo: "Destinatário e finalidade",
-    corpo: `Documento preparado para apoio informativo ao(à) advogado(a) que acompanhará o caso do cliente identificado internamente como **Cliente A.P.**\n\nFinalidade: reunir fatos narrados pelo cliente, fundamentos frequentes em demandas similares e precedentes públicos com link para conferência — sem recomendação de estratégia ou prognóstico de êxito.`,
+    corpo: `Relatório de pesquisa documental sobre o caso descrito pelo solicitante (neste modelo: referência interna **Cliente A.P.**, dados fictícios).\n\nOrganizamos o que foi narrado, o que a legislação costuma envolver em situações parecidas e o que tribunais já decidiram em casos semelhantes — para leitura e entendimento. Não indicamos se deve contratar advogado(a), ajuizar ação ou qualquer outro passo; essa decisão é exclusivamente sua.`,
   },
   {
     titulo: "Resumo executivo dos fatos (narrativa do cliente)",
@@ -35,7 +35,7 @@ export const MODELO_RELATORIO_SECOES = [
     corpo: `**TJMT (2026) — bloqueio de WhatsApp Business**\nO que aconteceu: profissional teve a conta comercial bloqueada sem explicação clara.\nO que o juiz decidiu: suspender o serviço sem motivo adequado é falha na prestação e viola a boa-fé do consumidor.\nResultado: indenização de R$ 10 mil por danos morais.\nFonte: tjmt.jus.br (notícia institucional, mar/2026)\n\n**TJPR (2025) — plataforma digital**\nO que aconteceu: usuário contestou restrição de acesso em serviço contratado.\nO que o juiz decidiu: o fornecedor deve manter o serviço disponível; interrupção abusiva não é permitida.\nResultado: obrigação de fazer — restabelecer o acesso.\nFonte: jurisprudência pública TJPR\n\n**TJMA (2024) — conta em rede social**\nO que aconteceu: perfil bloqueado sem aviso prévio eficaz.\nO que o juiz decidiu: bloqueio sem contraditório fere direitos do consumidor digital.\nResultado: restabelecimento da conta e danos morais.\nFonte: tjma.jus.br\n\nNo relatório contratado, selecionamos os casos mais próximos dos seus fatos — com data, tribunal e link para conferência.`,
   },
   {
-    titulo: "Síntese para reunião com advogado(a)",
-    corpo: `Há decisões públicas em que tribunais reconheceram falha quando plataformas bloqueiam contas sem motivação clara — especialmente após a própria empresa admitir que não havia infração.\n\n**O que você leva na consulta:** fatos organizados, fundamentos frequentes (CDC, Marco Civil) e precedentes explicados em linguagem clara, com fontes para o advogado(a) aprofundar a estratégia.`,
+    titulo: "Síntese do que a pesquisa mostrou",
+    corpo: `Há decisões públicas em que tribunais reconheceram falha quando plataformas bloqueiam contas sem motivação clara — especialmente após a própria empresa admitir que não havia infração.\n\n**O que este relatório organiza para você:** fatos em ordem cronológica, fundamentos legais que aparecem com frequência nesse tipo de conflito (CDC, Marco Civil) e precedentes explicados em linguagem clara, com fontes públicas para conferência.`,
   },
 ] as const;

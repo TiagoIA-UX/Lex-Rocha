@@ -45,9 +45,9 @@ export const COPY_SITE = {
   metadata: {
     defaultTitle: "Lex Rocha — Você tem um caso contra uma empresa?",
     description:
-      "Descreva o que aconteceu. Pesquisamos casos brasileiros semelhantes já decididos e explicamos em linguagem clara. Triagem inicial sem cobrança — você paga apenas se quiser o relatório. Material informativo para a consulta com advogado(a) OAB. CNPJ 61.699.939/0001-80.",
+      "Descreva o que aconteceu. Pesquisamos casos brasileiros semelhantes já decididos e explicamos em linguagem clara o que os tribunais entenderam. Triagem inicial sem cobrança.",
     ogDescription:
-      "Precedentes organizados em fontes públicas verificáveis sobre LGPD, plataformas digitais e consumo online. Cada relatório é revisado por uma pessoa antes do envio. Material informativo — não substitui advogado(a).",
+      "Casos reais explicados em português claro — o que aconteceu, o que o juiz decidiu e o que foi concedido. Relatório revisado por uma pessoa antes do envio.",
     keywords: [
       "pesquisa jurisprudência",
       "direito digital",
@@ -67,8 +67,6 @@ export const COPY_SITE = {
       "Pesquisamos casos reais já decididos no Brasil e explicamos o que aconteceu em situações como a sua — em linguagem que você entende, sem enrolação.",
     scope:
       "A triagem inicial é sem cobrança. Se não encontrarmos casos semelhantes documentados, avisamos antes de qualquer pagamento. Escopo e valor confirmados por escrito.",
-    disclaimer:
-      "Material informativo. Não substitui advogado(a) inscrito(a) na OAB nem indica probabilidade de êxito. Pesquisa apenas — sem recomendação ou aconselhamento jurídico.",
     ctaPrimary: "Descrever meu caso",
     ctaSecondary: "Ver como funciona",
     ctaWhatsapp: "WhatsApp",
@@ -115,7 +113,7 @@ export const COPY_SITE = {
     cta: "Abrir modelo completo",
     pageTitle: "Modelo de relatório",
     pageIntro:
-      "Veja o que o relatório inclui: seu caso explicado em linguagem clara, o que o CDC e a legislação dizem sobre a sua situação, casos semelhantes já decididos e o que foi concedido, e as fontes identificadas (tribunal e data). É pesquisa apenas — sem recomendações nem aconselhamento jurídico.",
+      "Veja como o relatório explica o seu caso: o que aconteceu, o que a lei diz, casos semelhantes já decididos (com o que o juiz entendeu e o que foi concedido) e as fontes para conferência.",
     ctaSolicitar: "Solicitar pesquisa",
     ctaWhatsapp: "Dúvidas no WhatsApp",
     whatsappMensagem:
@@ -141,7 +139,7 @@ export const COPY_SITE = {
       },
       {
         title: "Linguagem clara",
-        text: "Explicamos o que a lei diz e o que casos semelhantes obtiveram — fatos, sem aconselhamento.",
+        text: "Traduzimos o que os tribunais decidiram em situações parecidas — sem juridiquês desnecessário.",
       },
       {
         title: "Se não houver base, a gente avisa",
@@ -167,10 +165,12 @@ export const COPY_SITE = {
       "Se a nossa pesquisa não localizar decisão semelhante à sua já julgada no Brasil, não há cobrança. Mesmo assim, você recebe o que foi pesquisado e os fundamentos legais aplicáveis, com o cenário explicado de forma clara.",
   },
   precedentes: {
-    eyebrow: "O que você recebe",
-    title: "Um relatório que responde às perguntas certas",
+    eyebrow: "Exemplos reais",
+    title: "O que os tribunais já decidiram em casos parecidos",
     description:
-      "Casos reais já decididos em situações semelhantes à sua, com o que foi efetivamente concedido (reembolsos, indenizações, cancelamentos) — relatado como pesquisa, nunca como promessa ou recomendação.",
+      "Não é lista de links — explicamos o que aconteceu, o que o juiz entendeu e o que foi concedido. No seu relatório, selecionamos os casos mais próximos da sua situação.",
+    notaAmostra:
+      "Amostra ilustrativa de decisões públicas. Cada caso é diferente — o relatório contratado traz os precedentes selecionados para os seus fatos.",
   },
   parceiros: {
     eyebrow: "Programa de parceiros",
@@ -204,7 +204,7 @@ export const COPY_SITE = {
   },
   footer: {
     about:
-      "A Lex Rocha presta pesquisa documental independente e informativa sobre direito do consumidor, com base em registros públicos. Não é escritório de advocacia e não presta aconselhamento jurídico nem representação. Usar este site ou ler um relatório não cria relação advogado-cliente. As leis mudam e cada caso depende dos seus próprios fatos — a decisão final é sempre sua.",
+      "Pesquisa documental de jurisprudência pública sobre direito do consumidor. Organizamos o que os tribunais já decidiram em casos semelhantes ao seu — em linguagem que você entende.",
     whatsappMensagem:
       "Olá! Contato pelo site {domain} — pesquisa de precedentes.",
   },
@@ -239,6 +239,11 @@ export const COPY_SITE = {
   cookies: {
     dialogLabel: "Preferências de cookies",
     title: "Cookies e privacidade",
+  },
+  avisoLegal: {
+    texto:
+      "Lex Rocha organiza pesquisa em fontes públicas e não é escritório de advocacia. O relatório é informativo e não substitui advogado(a) — veja os",
+    linkTermos: "Termos de uso",
   },
 } as const;
 

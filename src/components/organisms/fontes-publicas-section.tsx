@@ -11,10 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { COPY_SITE } from "@/lib/constants/copy-site";
-import {
-  FONTES_PESQUISA_PUBLICA,
-  NOTA_FONTES_RELATORIO,
-} from "@/lib/constants/fontes-publicas";
+import { FONTES_PESQUISA_PUBLICA } from "@/lib/constants/fontes-publicas";
 
 const tipoLabel = {
   jurisprudencia: "Jurisprudência",
@@ -34,7 +31,6 @@ export function FontesPublicasSection() {
           title={fontes.title}
           description={fontes.description}
         />
-        <p className="max-w-3xl text-sm text-muted-foreground">{NOTA_FONTES_RELATORIO}</p>
         <div className="grid gap-4 md:grid-cols-2">
           {FONTES_PESQUISA_PUBLICA.map((fonte) => (
             <Card key={fonte.url}>

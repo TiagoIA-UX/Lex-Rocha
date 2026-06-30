@@ -9,7 +9,6 @@ import {
   MODELO_RELATORIO_META,
   MODELO_RELATORIO_SECOES,
 } from "@/lib/constants/modelo-relatorio-demo";
-import { AVISO_LEGAL_RELATORIO } from "@/lib/constants/pesquisa-documental";
 
 export function ModeloRelatorioSection({ compact = false }: { compact?: boolean }) {
   return (
@@ -40,7 +39,6 @@ export function ModeloRelatorioSection({ compact = false }: { compact?: boolean 
             <p className="rounded-md border border-amber-200 bg-amber-50/90 p-3 text-xs text-amber-950">
               {MODELO_RELATORIO_META.aviso}
             </p>
-            <p className="text-xs text-muted-foreground">{AVISO_LEGAL_RELATORIO}</p>
 
             {MODELO_RELATORIO_SECOES.map((sec) => (
               <article key={sec.titulo} className="space-y-2">

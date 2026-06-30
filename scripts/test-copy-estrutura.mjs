@@ -91,6 +91,9 @@ if (existsSync(precedentesPath)) {
   const prec = readFileSync(precedentesPath, "utf8");
   if (prec.includes("LGPD") && prec.includes("Marco Civil")) ok("precedentes.ts: LGPD + Marco Civil");
   else fail("precedentes.ts incompleto");
+  if (prec.includes("decisao") && prec.includes("CASOS_PRECEDENTES_AMOSTRA")) {
+    ok("precedentes.ts: casos com explicação do que o juiz decidiu");
+  } else fail("precedentes.ts sem estrutura de casos explicados");
 }
 
 const fontesPath = join(ROOT, "src", "lib", "constants", "fontes-publicas.ts");

@@ -3,14 +3,14 @@
  * Mesma estrutura de seções do PDF entregue ao cliente.
  */
 
-import { AVISO_DESTAQUE_PDF, TITULO_RELATORIO_PDF } from "@/lib/constants/estrutura-relatorio";
+import { TITULO_RELATORIO_PDF } from "@/lib/constants/estrutura-relatorio";
 
 export const MODELO_RELATORIO_META = {
   referencia: "REL-2026-042",
   dataEmissao: "maio de 2026",
   area: "Prestação de serviços digitais — suspensão de conta",
   titulo: TITULO_RELATORIO_PDF,
-  aviso: `MODELO ILUSTRATIVO — ${AVISO_DESTAQUE_PDF}`,
+  aviso: "Modelo ilustrativo com dados fictícios — não representa um caso real.",
 } as const;
 
 export const MODELO_RELATORIO_SECOES = [
@@ -31,11 +31,11 @@ export const MODELO_RELATORIO_SECOES = [
     corpo: `• Art. 14 do CDC — falha na prestação de serviço.\n• Princípio do *venire contra factum proprium* (comportamento contraditório).\n• Art. 20 do Marco Civil da Internet — responsabilização e defesa do usuário.\n• Art. 20 da LGPD — explicação de decisões automatizadas, quando aplicável.\n• Tutela de urgência e astreintes (arts. 300 e 537 do CPC) — citados em jurisprudência, não avaliados neste relatório.`,
   },
   {
-    titulo: "Precedentes públicos pesquisados (amostra)",
-    corpo: `Amostra de decisões e notícias de tribunais brasileiros em temas afins (serviços digitais e relação de consumo). O relatório contratado trará os precedentes selecionados para o seu caso, com ementa ou resumo e data.\n\n• TJMT — indenização por suspensão indevida de conta em serviço de mensagens (2025/2026)\n  https://www.tjmt.jus.br/noticias/2026/3/bloqueio-sem-justificativa-no-whatsapp-business-gera-indenizacao-r-10-mil\n\n• TJ-PR — obrigação de fazer em plataforma digital (2025)\n  https://www.jusbrasil.com.br/jurisprudencia/tj-pr/5237350680/inteiro-teor-5237350696\n\n• TJMA — restabelecimento de conta e danos morais\n  https://www.tjma.jus.br/midia/portal/noticia/514425/meta-e-condenada-a-restabelecer-whatsapp-de-usuaria-bloqueado-indevidamente\n\n(Links públicos para conferência — sem garantia de aplicabilidade ao seu caso.)`,
+    titulo: "Casos semelhantes já decididos (amostra)",
+    corpo: `**TJMT (2026) — bloqueio de WhatsApp Business**\nO que aconteceu: profissional teve a conta comercial bloqueada sem explicação clara.\nO que o juiz decidiu: suspender o serviço sem motivo adequado é falha na prestação e viola a boa-fé do consumidor.\nResultado: indenização de R$ 10 mil por danos morais.\nFonte: tjmt.jus.br (notícia institucional, mar/2026)\n\n**TJPR (2025) — plataforma digital**\nO que aconteceu: usuário contestou restrição de acesso em serviço contratado.\nO que o juiz decidiu: o fornecedor deve manter o serviço disponível; interrupção abusiva não é permitida.\nResultado: obrigação de fazer — restabelecer o acesso.\nFonte: jurisprudência pública TJPR\n\n**TJMA (2024) — conta em rede social**\nO que aconteceu: perfil bloqueado sem aviso prévio eficaz.\nO que o juiz decidiu: bloqueio sem contraditório fere direitos do consumidor digital.\nResultado: restabelecimento da conta e danos morais.\nFonte: tjma.jus.br\n\nNo relatório contratado, selecionamos os casos mais próximos dos seus fatos — com data, tribunal e link para conferência.`,
   },
   {
     titulo: "Síntese para reunião com advogado(a)",
-    corpo: `O conjunto documental sugere **relevância jurisprudencial crescente** em bloqueios sem motivação clara, especialmente quando há comunicação da própria plataforma reconhecendo inexistência de infração.\n\n**O que este relatório não faz:** indicar se deve ajuizar ação, valor da causa, pedidos ou probabilidade de liminar. Essas conclusões são etapa privativa da advocacia.\n\n**O que você ganha:** horas de pesquisa já organizadas, linguagem clara e referências clicáveis para a primeira consulta ser mais produtiva.`,
+    corpo: `Há decisões públicas em que tribunais reconheceram falha quando plataformas bloqueiam contas sem motivação clara — especialmente após a própria empresa admitir que não havia infração.\n\n**O que você leva na consulta:** fatos organizados, fundamentos frequentes (CDC, Marco Civil) e precedentes explicados em linguagem clara, com fontes para o advogado(a) aprofundar a estratégia.`,
   },
 ] as const;

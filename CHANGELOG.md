@@ -4,6 +4,16 @@ Todas as mudanças relevantes do projeto seguem [Semantic Versioning](https://se
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-06-30
+
+### Alterado
+
+- Precedentes explicados em linguagem natural (o que aconteceu, o que o juiz decidiu, resultado)
+- Aviso legal único na home (padrão de mercado); removidas repetições no hero, modelo, fontes e footer
+- Modelo de relatório: amostra de casos com explicação clara em vez de lista de links
+- Seção "O que os tribunais já decidiram" com cards de casos reais (TJMT, TJPR, TJMA, TJSP)
+- Copy mais confiante: foco em esclarecer o caso, menos disclaimers repetidos
+
 ## [1.1.0] - 2026-06-30
 
 ### Adicionado

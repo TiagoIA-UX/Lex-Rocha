@@ -7,7 +7,6 @@ import { montarLinkWhatsApp, whatsappConfigurado } from "@/lib/whatsapp";
 import { SITE } from "@/lib/constants/site";
 
 import { ManageCookiesButton } from "@/components/legal/manage-cookies-button";
-import { TEXTO_JURISDICAO_BRASILEIRA } from "@/lib/constants/lgpd";
 
 const legalLinks = [
   { href: "/privacidade", label: "Política de privacidade" },
@@ -79,7 +78,6 @@ export function SiteFooter() {
             <ManageCookiesButton />
           </div>
         </div>
-        <p className="mt-8 text-xs text-primary-foreground/85">{TEXTO_JURISDICAO_BRASILEIRA}</p>
         <div className="mt-6 border-t border-primary-foreground/20 pt-6 text-center text-xs text-primary-foreground/85">
           © {year} {SITE.legalName}. Todos os direitos reservados. · {SITE.domain}
         </div>

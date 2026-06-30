@@ -34,7 +34,6 @@ export function HeroSection() {
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-foreground/90">{hero.lead}</p>
           <p className="max-w-xl text-base text-muted-foreground">{hero.scope}</p>
-          <p className="text-xs font-medium text-primary/90">{hero.disclaimer}</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg" className="gap-2">
               <Link href="/solicitar">

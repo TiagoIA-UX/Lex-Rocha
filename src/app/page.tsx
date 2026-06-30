@@ -1,4 +1,5 @@
 import { AreasAtendidasSection } from "@/components/organisms/areas-atendidas-section";
+import { AvisoLegalSite } from "@/components/organisms/aviso-legal-site";
 import { CtaBanner } from "@/components/organisms/cta-banner";
 import { FontesPublicasSection } from "@/components/organisms/fontes-publicas-section";
 import { HeroSection } from "@/components/organisms/hero-section";
@@ -28,6 +29,7 @@ export default function HomePage() {
         <PartnersWaitlistSection />
         <CtaBanner />
       </main>
+      <AvisoLegalSite />
       <SiteFooter />
       <WhatsAppFloat />
     </>

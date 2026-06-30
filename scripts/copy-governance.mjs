@@ -34,6 +34,7 @@ export const COPY_SITE_KEYS = [
   "parceiro",
   "whatsappFloat",
   "cookies",
+  "avisoLegal",
 ];
 
 /** Termos de nicho TI que devem aparecer na fonte única */
@@ -56,6 +57,7 @@ export const COMPONENTES_COPY_SITE = [
   "partners-waitlist-section.tsx",
   "cta-banner.tsx",
   "site-footer.tsx",
+  "aviso-legal-site.tsx",
   "whatsapp-float.tsx",
   "solicitar-pesquisa-form.tsx",
   "cookie-consent-banner.tsx",

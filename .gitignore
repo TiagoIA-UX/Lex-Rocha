@@ -52,3 +52,4 @@ signalhub-br/
 logs/
 *.log
 *.tmp
+fingerprints.txt

@@ -21,35 +21,34 @@ O serviço público em [lexrocha.com.br](https://lexrocha.com.br) é **pesquisa 
 - Revender, sublicenciar ou disponibilizar o software a terceiros;
 - Remover avisos de copyright, fingerprint de integridade (`.zairyx-fingerprint`) ou referências ao Titular;
 - Utilizar prompts, copy, fluxos de relatório ou lógica de precificação fora do escopo autorizado;
-- Versionar ou expor materiais em `private/` (propriedade intelectual local — ver `.gitignore`).
+- Versionar ou expor materiais em `private/` (propriedade intelectual local).
 
 ## 3. Uso autorizado
 
 Com **contratação válida** do serviço ou **licença comercial** acordada:
 
-- O cliente final utiliza o site e recebe relatórios conforme Termos e pagamento (Stripe);
+- O cliente final utiliza o site e recebe relatórios conforme Termos e pagamento;
 - Colaboradores sob NDA/contrato podem acessar repositório privado indicado pelo Titular;
-- A licença é **não exclusiva**, **intransferível** e **revogável** — não transfere propriedade intelectual.
+- A licença é **não exclusiva**, **intransferível** e **revogável**.
 
 ## 4. Propriedade intelectual
 
-Código, design, copy (`copy-site.ts`), prompts (`private/`), estrutura de relatórios, integrações fiscais e marca **Lex Rocha** permanecem do Titular.
+Código, design, copy, prompts (`private/`), estrutura de relatórios e marca **Lex Rocha** permanecem do Titular.
 
 ## 5. Garantias e limitação
 
-O software é fornecido para **organização de pesquisa em fontes públicas** com revisão humana. Não há garantia de resultado jurídico, procedência de ação ou conversão comercial.  
-Em nenhuma hipótese o Titular responde por danos indiretos superiores ao valor pago pelo cliente nos **últimos 3 meses** pelo serviço relacionado.
+O software é fornecido para **organização de pesquisa em fontes públicas** com revisão humana. Não há garantia de resultado jurídico.  
+Em nenhuma hipótese o Titular responde por danos indiretos superiores ao valor pago nos **últimos 3 meses** pelo serviço relacionado.
 
-## 6. Rescisão
+## 6. Lei aplicável
 
-O Titular pode revogar licenças imediatamente em caso de violação, clonagem indevida, uso fraudulento ou descumprimento dos Termos.  
 Lei da República Federativa do Brasil. Foro: comarca do domicílio do Titular.
 
 ## 7. Contato
 
-Licenciamento e denúncias de uso indevido: canais oficiais Lex Rocha / Zairyx indicados no site e contratos de prestação de serviços.
+Licenciamento e denúncias de uso indevido: canais oficiais Lex Rocha / Zairyx.
 
 ---
 
-*Versão da licença: 1.0.0 — 2026-06-30*  
-*Termos do serviço: [lexrocha.com.br/termos](https://lexrocha.com.br/termos)*
+*Versão da licença: 1.0.0 — 2026-07-01*  
+*Termos: [lexrocha.com.br/termos](https://lexrocha.com.br/termos)*

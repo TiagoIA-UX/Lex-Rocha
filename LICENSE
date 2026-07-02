@@ -1,0 +1,55 @@
+# Licença de Uso Proprietário — Lex Rocha
+
+**Titular:** Tiago Aureliano da Rocha  
+**CNPJ:** 61.699.939/0001-80 — Lex Rocha (prestação de serviços)  
+**Software:** Lex Rocha — plataforma de pesquisa documental (repositório `Lex-Rocha`)
+
+---
+
+## 1. Natureza
+
+Este software é **proprietário**. Não é software livre (open source).  
+O direito de **instalar, executar, modificar, hospedar ou redistribuir** o código ou qualquer parte dele depende de **autorização expressa** do Titular.
+
+O serviço público em [lexrocha.com.br](https://lexrocha.com.br) é **pesquisa documental informativa** — não constitui advocacia nem substitui advogado(a). Ver Termos de Uso em `/termos`.
+
+## 2. Uso proibido sem autorização
+
+É **proibido**, sem contrato ou licença escrita do Titular:
+
+- Copiar, clonar, forkar ou republicar este repositório ou trechos substanciais do código;
+- Revender, sublicenciar ou disponibilizar o software a terceiros;
+- Remover avisos de copyright, fingerprint de integridade (`.zairyx-fingerprint`) ou referências ao Titular;
+- Utilizar prompts, copy, fluxos de relatório ou lógica de precificação fora do escopo autorizado;
+- Versionar ou expor materiais em `private/` (propriedade intelectual local — ver `.gitignore`).
+
+## 3. Uso autorizado
+
+Com **contratação válida** do serviço ou **licença comercial** acordada:
+
+- O cliente final utiliza o site e recebe relatórios conforme Termos e pagamento (Stripe);
+- Colaboradores sob NDA/contrato podem acessar repositório privado indicado pelo Titular;
+- A licença é **não exclusiva**, **intransferível** e **revogável** — não transfere propriedade intelectual.
+
+## 4. Propriedade intelectual
+
+Código, design, copy (`copy-site.ts`), prompts (`private/`), estrutura de relatórios, integrações fiscais e marca **Lex Rocha** permanecem do Titular.
+
+## 5. Garantias e limitação
+
+O software é fornecido para **organização de pesquisa em fontes públicas** com revisão humana. Não há garantia de resultado jurídico, procedência de ação ou conversão comercial.  
+Em nenhuma hipótese o Titular responde por danos indiretos superiores ao valor pago pelo cliente nos **últimos 3 meses** pelo serviço relacionado.
+
+## 6. Rescisão
+
+O Titular pode revogar licenças imediatamente em caso de violação, clonagem indevida, uso fraudulento ou descumprimento dos Termos.  
+Lei da República Federativa do Brasil. Foro: comarca do domicílio do Titular.
+
+## 7. Contato
+
+Licenciamento e denúncias de uso indevido: canais oficiais Lex Rocha / Zairyx indicados no site e contratos de prestação de serviços.
+
+---
+
+*Versão da licença: 1.0.0 — 2026-06-30*  
+*Termos do serviço: [lexrocha.com.br/termos](https://lexrocha.com.br/termos)*

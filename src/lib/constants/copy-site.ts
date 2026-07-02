@@ -96,7 +96,7 @@ export const COPY_SITE = {
       {
         title: "2. Cruzamos o seu caso e mostramos o valor exato",
         description:
-          "Nossas ferramentas de pesquisa consultam decisões públicas brasileiras semelhantes à sua situação. Em seguida você vê o plano recomendado e o valor fixo — sem cobrança até você decidir.",
+          "Cruzamos os seus fatos com precedentes e legislação de fontes públicas — triagem automatizada e pesquisa humana nos portais indicados. Você vê o plano recomendado e o valor fixo, sem cobrança até decidir.",
       },
       {
         title: "3. Revisão humana e entrega",

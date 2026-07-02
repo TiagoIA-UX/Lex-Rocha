@@ -11,14 +11,14 @@ export type FaixaRelatorio = "essencial" | "padrao" | "completo";
 export const CAPACIDADE_OPERACIONAL = {
   /** Horas úteis de produção por dia (fundador solo, conservador) */
   horasUteisPorDia: 6,
-  /** Máximo sustentável de relatórios/dia sem atrasar fila */
-  maxRelatoriosPorDia: 3,
+  /** Máximo sustentável de relatórios/dia sem atrasar fila (híbrido Groq + Claude + revisão) */
+  maxRelatoriosPorDia: 5,
   /** Aviso quando fila passar deste número */
   maxNaFilaAntesAviso: 5,
   horasPorRelatorio: {
-    essencial: 1.0,
-    padrao: 1.5,
-    completo: 2.5,
+    essencial: 0.75,
+    padrao: 1.0,
+    completo: 1.75,
   } satisfies Record<FaixaRelatorio, number>,
   /** Referência externa (só documentação) */
   referenciaMercado: {

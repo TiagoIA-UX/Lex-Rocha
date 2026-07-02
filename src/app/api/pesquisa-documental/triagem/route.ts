@@ -1,53 +1,46 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-import { classificarCasoTriagem } from "@/lib/groq/triagem";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { classificarTriagemGroq } from "@/lib/groq/triagem";
+import { GroqError } from "@/lib/groq/errors";
+import { getPromptClassificadorTriagem } from "@/lib/constants/pesquisa-documental.ip.server";
 import { triagemInputSchema } from "@/lib/validations/pesquisa-documental";
 
 export const runtime = "nodejs";
-export const maxDuration = 30;
 
 export async function POST(request: Request) {
   try {
     const body: unknown = await request.json();
-    const dados = triagemInputSchema.parse(body);
-
-    const { resultado, modelo, tokens } = await classificarCasoTriagem({
-      area: dados.area,
-      fatosResumo: dados.fatos,
-    });
-
-    try {
-      const supabase = createAdminClient();
-      await supabase.from("log_ia").insert({
-        api_usada: "groq",
-        modelo,
-        tokens_entrada: tokens?.entrada ?? null,
-        tokens_saida: tokens?.saida ?? null,
-      });
-    } catch {
-      // auditoria opcional — não bloqueia triagem
-    }
+    const entrada = triagemInputSchema.parse(body);
+    const resultado = await classificarTriagemGroq(entrada, getPromptClassificadorTriagem());
 
     return NextResponse.json({
-      triagem: resultado,
-      modelo,
-      tokens,
+      triagem: resultado.triagem,
+      modelo: resultado.modelo,
+      api: "groq",
+      tokens: resultado.tokens,
     });
   } catch (error) {
     console.error("[pesquisa-documental/triagem]", error);
 
     if (error instanceof ZodError) {
+      return NextResponse.json({ erro: "Dados inválidos para triagem." }, { status: 400 });
+    }
+
+    if (error instanceof GroqError) {
+      return NextResponse.json({ erro: error.message, codigo: error.codigo }, { status: 502 });
+    }
+
+    if (error instanceof Error && error.message.includes("pesquisa-documental.ip.json")) {
       return NextResponse.json(
-        { erro: "Dados inválidos. Revise área e resumo dos fatos." },
-        { status: 400 }
+        {
+          erro:
+            "Configuração de prompts ausente. Crie private/pesquisa-documental.ip.json a partir do example.",
+        },
+        { status: 503 }
       );
     }
 
-    const mensagem =
-      error instanceof Error ? error.message : "Falha na classificação do caso.";
-
-    return NextResponse.json({ erro: mensagem }, { status: 500 });
+    return NextResponse.json({ erro: "Erro na classificação do caso." }, { status: 500 });
   }
 }

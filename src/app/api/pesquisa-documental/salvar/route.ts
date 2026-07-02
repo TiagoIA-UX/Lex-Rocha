@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-import { calcularValorSugerido } from "@/lib/constants/pesquisa-documental";
+import {
+  assertCitacoesRelatorioValidas,
+  montarPacotePesquisaDocumentalBasico,
+  RetrievalError,
+} from "@/lib/pesquisa-documental/retrieval";
 import {
   garantirCodigoUnico,
   inferirFaixaPorValor,
@@ -18,13 +22,24 @@ export async function POST(request: Request) {
     const dados = salvarRelatorioSchema.parse(body);
 
     const supabase = createAdminClient();
-    const qtdPrecedentes = dados.precedentes
-      .split(/\n+/)
-      .map((linha) => linha.trim())
-      .filter(Boolean).length;
+
+    const pacote = montarPacotePesquisaDocumentalBasico({
+      precedentesTexto: dados.precedentes,
+      fundamentosIds: dados.fundamentos,
+    });
+
+    const status = dados.status ?? "gerado";
+
+    if (status === "gerado") {
+      assertCitacoesRelatorioValidas({
+        conteudoRelatorio: dados.conteudoGerado,
+        urlsAutorizadas: pacote.urlsAutorizadas,
+      });
+    }
+
     const valorCobrado =
       dados.valorCobrado ??
-      calcularValorSugerido(qtdPrecedentes, dados.fundamentos.length);
+      (pacote.plano.tipo === "cobranca" ? pacote.plano.valor : 0);
 
     const t = dados.triagem;
     const urgencia =
@@ -37,7 +52,6 @@ export async function POST(request: Request) {
       INDETERMINADO: { min: null, max: null },
     } as const;
     const faixa = faixaValorMap[t.analise_fatores.faixa_estimada_causa];
-    const status = dados.status ?? "gerado";
     const codigo =
       status === "gerado" ? await garantirCodigoUnico("relatorios_pesquisa") : null;
     const faixaRelatorio = inferirFaixaPorValor(valorCobrado);
@@ -117,6 +131,10 @@ export async function POST(request: Request) {
 
     if (error instanceof ZodError) {
       return NextResponse.json({ erro: "Dados inválidos para salvamento." }, { status: 400 });
+    }
+
+    if (error instanceof RetrievalError) {
+      return NextResponse.json({ erro: error.message, codigo: error.codigo }, { status: 400 });
     }
 
     return NextResponse.json({ erro: "Erro ao salvar relatório." }, { status: 500 });

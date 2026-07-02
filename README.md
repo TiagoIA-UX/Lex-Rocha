@@ -1,88 +1,40 @@
 # Lex Rocha
 
-**Lex Rocha Tecnologia Jurídica** — pesquisa documental de precedentes em portais públicos, com relatório informativo para o cidadão levar ao advogado.
+**Pesquisa documental informativa** em fontes públicas brasileiras — direito do consumidor e relações digitais.
 
-- **Domínio:** [lexrocha.com.br](https://lexrocha.com.br)
-- **Fundador:** Tiago Aureliano da Rocha
-- **CNPJ:** 61.699.939/0001-80
+| Campo | Valor |
+|-------|--------|
+| **Titular** | Tiago Aureliano da Rocha |
+| **CNPJ (MEI)** | 61.699.939/0001-80 |
+| **Site** | [lexrocha.com.br](https://lexrocha.com.br) |
+| **Licença** | [LICENSE](./LICENSE) — software proprietário |
+| **Versão** | Ver [CHANGELOG.md](./CHANGELOG.md) |
+
+> **© 2026 Tiago Aureliano da Rocha — Lex Rocha, prestação de serviços (CNPJ 61.699.939/0001-80).**  
+> Todos os direitos reservados. Uso, cópia e redistribuição do código somente com autorização expressa do titular.
+
+## Repositório
+
+**GitHub:** [github.com/TiagoIA-UX/Lex-Rocha](https://github.com/TiagoIA-UX/Lex-Rocha)
+
+Prompts de produção, taxonomias e materiais estratégicos ficam em `private/` — **não versionados** (propriedade intelectual).
 
 ## Stack
 
-| Camada | Tecnologia |
-|--------|------------|
-| Frontend | Next.js 14 (App Router), TypeScript, Tailwind, shadcn/ui |
-| Backend | Supabase (PostgreSQL, Auth, Storage) |
-| Organização de texto | Anthropic Claude API (somente servidor) |
-| E-mail | Resend |
-| PDF | jsPDF (cliente) |
-| Deploy | Vercel |
+- Next.js 14 · Supabase · Stripe · Groq (triagem) · Claude (relatórios) · Nuvem Fiscal (NFS-e)
 
-## Setup local
+## Desenvolvimento local
 
 ```bash
-npm install
 cp .env.local.example .env.local
-# Preencha Supabase e ANTHROPIC_API_KEY em .env.local
+# Preencha credenciais (Supabase, GROQ_API_KEY, ANTHROPIC_API_KEY, etc.)
+
+npm install
 npm run dev
 ```
 
-Ou no Windows:
-
-```powershell
-.\scripts\iniciar-dev.ps1
-```
-
-Abra **http://localhost:3000** (não use porta 8501 — era o painel antigo, removido).
-
-Ferramenta interna do fundador: **http://localhost:3000/pesquisa-documental**
-
-## Estrutura
-
-```
-src/
-├── app/                    # Rotas (landing, pesquisa-documental, APIs)
-├── components/
-├── lib/
-│   ├── anthropic/
-│   ├── constants/
-│   └── supabase/
-└── types/
-supabase/migrations/      # SQL — rodar no painel Supabase
-docs/MODULO_A_PESQUISA_DOCUMENTAL.md
-```
-
-## Variáveis de ambiente
-
-Veja `.env.local.example`.
-
-## Módulo ativo
-
-| Módulo | Descrição |
-|--------|-----------|
-| A — Pesquisa documental | Landing B2C + workspace interno + PDF |
-
-Módulos B (B2G) e C (similaridade) só após confirmação do fundador.
-
-## Deploy (Vercel)
-
-1. Conecte o repositório GitHub à Vercel.
-2. Configure as variáveis de ambiente.
-3. Aponte `lexrocha.com.br` no DNS.
-
-## SemVer e release
-
-- Versão atual em `package.json` e histórico em `CHANGELOG.md`.
-- Política de versionamento: `docs/SEMVER.md`.
-- Validação rápida de consistência:
+Validação:
 
 ```bash
-npm run semver:check
-```
-
-- Comandos de release:
-
-```bash
-npm run release:patch
-npm run release:minor
-npm run release:major
+npm test && npm run lint && npm run build
 ```

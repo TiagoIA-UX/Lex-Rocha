@@ -23,6 +23,18 @@ export const ALIASES_SECAO: Record<string, (typeof SECOES_RELATORIO_ORDEM)[numbe
   "SÍNTESE PARA REUNIÃO COM ADVOGADO(A)": "SÍNTESE FINAL",
 };
 
+/** Parágrafo padrão sobre OAB — síntese e relatórios (neutro, sem recomendar ação). */
+export const PARAGRAFO_LIMITE_OAB_SINTESE =
+  "Cada situação é diferente. Saber se esses precedentes se aplicam ao seu caso e se faz sentido ingressar com uma ação na Justiça é análise de um(a) advogado(a) inscrito(a) na OAB. A Lex Rocha entrega apenas a pesquisa documental organizada neste relatório — não indica esse passo nem substitui essa avaliação.";
+
+/** Instruções para a seção final em prompts de geração. */
+export function instrucoesPromptSinteseFinal(): string {
+  return `4. SÍNTESE FINAL (título alternativo aceito: CONSIDERAÇÕES FINAIS)
+(Resumo claro do que a pesquisa documentou em casos semelhantes aos fatos narrados: o que tribunais costumaram decidir, com quais fundamentos legais e quais resultados nas decisões públicas consultadas — ex.: restabelecimento de serviço, indenização quando constar nas decisões.
+Linguagem descritiva da pesquisa, em português acessível. Não concluir sobre o mérito do caso do solicitante, não prever resultado nem recomendar contratar advogado(a) ou ajuizar ação.
+Encerrar informando, em linguagem natural, que avaliar se os precedentes se aplicam ao caso específico e se cabe ingressar com uma ação na Justiça é atribuição de advogado(a) inscrito(a) na OAB, sem pressionar esse passo.)`;
+}
+
 export function textoDestinatarioFinalidade(referenciaInterna?: string): string {
   const ref = referenciaInterna?.trim()
     ? `identificado internamente como "${referenciaInterna.trim()}".`

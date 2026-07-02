@@ -36,6 +36,6 @@ export const MODELO_RELATORIO_SECOES = [
   },
   {
     titulo: "Síntese do que a pesquisa mostrou",
-    corpo: `Há decisões públicas em que tribunais reconheceram falha quando plataformas bloqueiam contas sem motivação clara — especialmente após a própria empresa admitir que não havia infração.\n\n**O que este relatório organiza para você:** fatos em ordem cronológica, fundamentos legais que aparecem com frequência nesse tipo de conflito (CDC, Marco Civil) e precedentes explicados em linguagem clara, com fontes públicas para conferência.`,
+    corpo: `Nos casos documentados com fatos parecidos com os que você narrou, decisões públicas mostram que juízes e juízas costumam determinar o **restabelecimento do serviço**, com fundamento na legislação aplicável (CDC, Marco Civil e correlatos), e, em parte dos julgamentos, **indenização** pelos danos relatados.\n\nEssa síntese descreve o que a pesquisa encontrou em tribunais — não uma conclusão sobre o seu caso específico. Saber se esses precedentes se aplicam a você e se faz sentido **ingressar com uma ação na Justiça** é análise de um(a) **advogado(a) inscrito(a) na OAB**. A Lex Rocha não indica esse passo nem substitui essa avaliação; você pode levar este relatório a um profissional de sua escolha, se quiser.`,
   },
 ] as const;

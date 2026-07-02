@@ -4,7 +4,21 @@ Todas as mudanças relevantes do projeto seguem [Semantic Versioning](https://se
 
 ## [Unreleased]
 
-## [1.1.2] - 2026-06-30
+## [1.1.3] - 2026-07-01
+
+### Adicionado
+
+- Camada retrieval: allowlist, pacote de fontes, fetch opcional, validação de citações
+- Triagem Groq (`POST /api/pesquisa-documental/triagem`) e geração com pacote enriquecido
+- Checklist de revisão no workspace antes de salvar relatório
+- `LICENSE` proprietário e `README` com copyright (prestação de serviços)
+- Scripts de teste Groq/portais (`scripts/test-groq-env.mjs`, `test-portais-retrieval.mjs`)
+
+### Alterado
+
+- Copy passo 2 da home: triagem automatizada + pesquisa humana (sem prometer browsing automático)
+- Capacidade operacional: até 5 relatórios/dia com horas ajustadas por plano
+
 
 ### Alterado
 

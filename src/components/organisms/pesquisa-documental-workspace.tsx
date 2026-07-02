@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import { ChecklistRevisaoCard } from "@/components/molecules/checklist-revisao-card";
 import { EstimativaCausaCard } from "@/components/molecules/estimativa-causa-card";
+import { PacotePesquisaCard } from "@/components/molecules/pacote-pesquisa-card";
 import { TriagemResultadoCard } from "@/components/molecules/triagem-resultado-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,10 +28,17 @@ import {
   type ResultadoTriagem,
 } from "@/lib/constants/pesquisa-documental";
 import {
+  checklistRevisaoCompleto,
+  estadoChecklistRevisaoInicial,
+  type EstadoChecklistRevisao,
+  type ItemChecklistRevisaoId,
+} from "@/lib/pesquisa-documental/checklist-revisao";
+import {
   AGRAVANTES_OPCOES,
   sugerirValorRelatorioCompleto,
   type AgravanteId,
 } from "@/lib/pesquisa-documental/estimativa";
+import type { ResumoPacotePesquisa } from "@/lib/pesquisa-documental/resumo-pacote";
 import { baixarPdfRelatorio } from "@/lib/pdf/relatorio-pesquisa";
 
 type FormState = {
@@ -73,6 +82,11 @@ export function PesquisaDocumentalWorkspace() {
   const [valorCobrado, setValorCobrado] = useState("");
   const [statusPagamento, setStatusPagamento] = useState<"pendente" | "pago">("pendente");
   const [gerandoLinkStripe, setGerandoLinkStripe] = useState(false);
+  const [enriquecerComFetch, setEnriquecerComFetch] = useState(false);
+  const [pacoteResumo, setPacoteResumo] = useState<ResumoPacotePesquisa | null>(null);
+  const [checklistRevisao, setChecklistRevisao] = useState<EstadoChecklistRevisao>(
+    estadoChecklistRevisaoInicial
+  );
 
   const numeroReferencia = useMemo(
     () =>
@@ -89,6 +103,20 @@ export function PesquisaDocumentalWorkspace() {
       }),
     [form.precedentes, form.fundamentos.length, triagem]
   );
+
+  const valorExibido = useMemo(() => {
+    if (pacoteResumo?.plano.tipo === "cobranca") {
+      return { valor: pacoteResumo.plano.valor, faixa: pacoteResumo.plano.label };
+    }
+    if (pacoteResumo?.plano.tipo === "sem_cobranca") {
+      return { valor: 0, faixa: pacoteResumo.plano.label };
+    }
+    return valorRelatorioSugerido;
+  }, [pacoteResumo, valorRelatorioSugerido]);
+
+  function atualizarChecklist(id: ItemChecklistRevisaoId, marcado: boolean) {
+    setChecklistRevisao((prev) => ({ ...prev, [id]: marcado }));
+  }
 
   function alternarAgravante(id: AgravanteId) {
     setForm((prev) => ({
@@ -113,6 +141,8 @@ export function PesquisaDocumentalWorkspace() {
     setClassificando(true);
     setTriagem(null);
     setConteudoGerado(null);
+    setPacoteResumo(null);
+    setChecklistRevisao(estadoChecklistRevisaoInicial());
 
     try {
       const res = await fetch("/api/pesquisa-documental/triagem", {
@@ -139,6 +169,8 @@ export function PesquisaDocumentalWorkspace() {
     setErro(null);
     setCarregando(true);
     setConteudoGerado(null);
+    setPacoteResumo(null);
+    setChecklistRevisao(estadoChecklistRevisaoInicial());
 
     try {
       const res = await fetch("/api/pesquisa-documental/gerar", {
@@ -152,6 +184,7 @@ export function PesquisaDocumentalWorkspace() {
           fundamentos: form.fundamentos,
           observacoes: form.observacoes || undefined,
           triagem,
+          enriquecerComFetch,
         }),
       });
 
@@ -159,7 +192,9 @@ export function PesquisaDocumentalWorkspace() {
         conteudoGerado?: string;
         modeloIa?: string;
         tokens?: { entrada?: number; saida?: number };
+        pacote?: ResumoPacotePesquisa;
         erro?: string;
+        codigo?: string;
       };
 
       if (!res.ok) throw new Error(json.erro ?? "Falha ao gerar relatório.");
@@ -167,6 +202,7 @@ export function PesquisaDocumentalWorkspace() {
       setConteudoGerado(json.conteudoGerado ?? "");
       setModeloIa(json.modeloIa ?? null);
       setTokensRelatorio(json.tokens ?? null);
+      setPacoteResumo(json.pacote ?? null);
     } catch (e) {
       setErro(e instanceof Error ? e.message : "Erro inesperado.");
     } finally {
@@ -177,6 +213,10 @@ export function PesquisaDocumentalWorkspace() {
   async function handleSalvar(rascunho = false) {
     if (!triagem) return;
     if (!rascunho && (!conteudoGerado || !modeloIa)) return;
+    if (!rascunho && !checklistRevisaoCompleto(checklistRevisao)) {
+      setErro("Marque todos os itens do checklist de revisão antes de salvar.");
+      return;
+    }
 
     setErro(null);
     setSalvando(true);
@@ -197,7 +237,7 @@ export function PesquisaDocumentalWorkspace() {
           modeloIa: modeloIa ?? "rascunho",
           tokensEntrada: tokensRelatorio?.entrada,
           tokensSaida: tokensRelatorio?.saida,
-          valorCobrado: valorRelatorioSugerido.valor,
+          valorCobrado: valorExibido.valor,
           status: rascunho ? "rascunho" : "gerado",
         }),
       });
@@ -218,7 +258,7 @@ export function PesquisaDocumentalWorkspace() {
       setPrevisaoEntrega(json.previsaoEntrega ?? null);
 
       if (!rascunho && conteudoGerado) {
-        setValorCobrado(String(valorRelatorioSugerido.valor));
+        setValorCobrado(String(valorExibido.valor));
         setModalPagamento(true);
       }
     } catch (e) {
@@ -491,8 +531,7 @@ export function PesquisaDocumentalWorkspace() {
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">
-              Preço sugerido do relatório: R$ {valorRelatorioSugerido.valor} (
-              {valorRelatorioSugerido.faixa})
+              Preço sugerido do relatório: R$ {valorExibido.valor} ({valorExibido.faixa})
             </p>
           </CardContent>
         </Card>
@@ -501,13 +540,28 @@ export function PesquisaDocumentalWorkspace() {
 
         {triagem && formularioValido && (
           <Card>
-            <CardContent className="flex flex-wrap gap-3 pt-6">
+            <CardContent className="space-y-4 pt-6">
+              <label className="flex cursor-pointer items-start gap-3 rounded-md border border-input p-3 text-sm">
+                <input
+                  type="checkbox"
+                  className="mt-0.5"
+                  checked={enriquecerComFetch}
+                  onChange={(e) => setEnriquecerComFetch(e.target.checked)}
+                />
+                <span>
+                  <span className="font-medium">Consultar fontes na web antes de gerar</span>
+                  <span className="mt-1 block text-xs text-muted-foreground">
+                    Busca HTTP apenas em domínios permitidos (Planalto, tribunais, Jusbrasil, gov.br).
+                    Falha de rede interrompe a geração — sem fallback silencioso.
+                  </span>
+                </span>
+              </label>
               <Button
                 type="button"
                 disabled={carregando}
                 onClick={handleGerarRelatorio}
               >
-                {carregando ? "Gerando relatório…" : "2. Confirmar e gerar relatório"}
+                {carregando ? "Gerando relatório…" : "2. Confirmar e gerar relatório (Claude)"}
               </Button>
             </CardContent>
           </Card>
@@ -518,6 +572,8 @@ export function PesquisaDocumentalWorkspace() {
             <CardContent className="pt-6 text-sm text-destructive">{erro}</CardContent>
           </Card>
         )}
+
+        {pacoteResumo && <PacotePesquisaCard pacote={pacoteResumo} />}
 
         {conteudoGerado && (
           <Card>
@@ -531,14 +587,24 @@ export function PesquisaDocumentalWorkspace() {
               <div className="prose prose-slate max-w-none whitespace-pre-wrap break-words rounded-lg border bg-card p-3 text-sm sm:p-4">
                 {conteudoGerado}
               </div>
+              <ChecklistRevisaoCard estado={checklistRevisao} onChange={atualizarChecklist} />
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="outline" onClick={handlePdf}>
                   Baixar PDF
                 </Button>
-                <Button type="button" disabled={salvando} onClick={() => handleSalvar(false)}>
+                <Button
+                  type="button"
+                  disabled={salvando || !checklistRevisaoCompleto(checklistRevisao)}
+                  onClick={() => handleSalvar(false)}
+                >
                   {salvando ? "Salvando…" : "Salvar e registrar pagamento"}
                 </Button>
               </div>
+              {!checklistRevisaoCompleto(checklistRevisao) && (
+                <p className="text-xs text-amber-800">
+                  Complete o checklist de revisão para habilitar o salvamento.
+                </p>
+              )}
             </CardContent>
           </Card>
         )}
@@ -569,8 +635,7 @@ export function PesquisaDocumentalWorkspace() {
               <CardTitle className="text-lg">Controle financeiro</CardTitle>
               {triagem && (
                 <p className="text-sm text-muted-foreground">
-                  Preço sugerido do relatório: R$ {valorRelatorioSugerido.valor} (
-                  {valorRelatorioSugerido.faixa}) · Faixa da causa:{" "}
+                  Preço sugerido do relatório: R$ {valorExibido.valor} ({valorExibido.faixa}) · Faixa da causa:{" "}
                   {triagem.analise_fatores.faixa_estimada_causa}
                 </p>
               )}

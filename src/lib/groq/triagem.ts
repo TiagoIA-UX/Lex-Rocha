@@ -1,84 +1,75 @@
-import { getPromptClassificadorTriagem } from "@/lib/constants/pesquisa-documental.ip.server";
 import {
-  type ResultadoTriagem,
   resultadoTriagemSchema,
+  type ResultadoTriagem,
 } from "@/lib/constants/pesquisa-documental";
-import { contemDadosPessoais } from "@/lib/validations/pesquisa-documental";
+import { type FetchFn, groqChatCompletion } from "@/lib/groq/completion";
+import { GroqError } from "@/lib/groq/errors";
+import type { triagemInputSchema } from "@/lib/validations/pesquisa-documental";
+import type { z } from "zod";
 
-const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODELO_TRIAGEM = "llama-3.3-70b-versatile";
+export type EntradaTriagemGroq = z.infer<typeof triagemInputSchema>;
 
-export async function classificarCasoTriagem(input: {
-  area: string;
-  fatosResumo: string;
-}): Promise<{ resultado: ResultadoTriagem; modelo: string; tokens?: { entrada: number; saida: number } }> {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) {
-    throw new Error("GROQ_API_KEY não configurada. Adicione em .env.local.");
+export type ResultadoTriagemGroq = {
+  triagem: ResultadoTriagem;
+  modelo: string;
+  tokens: { entrada: number; saida: number };
+};
+
+function extrairJsonObjeto(texto: string): unknown {
+  const trimmed = texto.trim();
+  try {
+    return JSON.parse(trimmed) as unknown;
+  } catch {
+    const match = trimmed.match(/\{[\s\S]*\}/);
+    if (!match) {
+      throw new GroqError("JSON_INVALIDO", "Groq não retornou JSON válido para triagem.");
+    }
+    try {
+      return JSON.parse(match[0]) as unknown;
+    } catch {
+      throw new GroqError("JSON_INVALIDO", "Groq retornou JSON malformado na triagem.");
+    }
   }
+}
 
-  if (contemDadosPessoais(input.fatosResumo)) {
-    throw new Error(
-      "O resumo dos fatos parece conter dados pessoais (CPF, e-mail, etc.). Remova antes da triagem — use apenas referência interna no campo próprio."
+export async function classificarTriagemGroq(
+  entrada: EntradaTriagemGroq,
+  promptSistema: string,
+  opcoes?: { fetchImpl?: FetchFn }
+): Promise<ResultadoTriagemGroq> {
+  const system = promptSistema;
+
+  const user = `Área selecionada pelo operador: ${entrada.area}
+
+Fatos narrados (sem PII):
+${entrada.fatos}
+
+Responda APENAS com um objeto JSON válido conforme o schema indicado no prompt de sistema.`;
+
+  const completion = await groqChatCompletion(
+    {
+      system,
+      user,
+      jsonMode: true,
+      maxTokens: 900,
+      temperature: 0.15,
+    },
+    opcoes?.fetchImpl
+  );
+
+  const bruto = extrairJsonObjeto(completion.texto);
+  const parsed = resultadoTriagemSchema.safeParse(bruto);
+
+  if (!parsed.success) {
+    throw new GroqError(
+      "TRIAGEM_INVALIDA",
+      `Triagem Groq fora do schema esperado: ${parsed.error.message}`
     );
   }
 
-  const prompt = getPromptClassificadorTriagem().replace("{area}", input.area).replace(
-    "{fatos_resumo}",
-    input.fatosResumo
-  );
-
-  const modelo = MODELO_TRIAGEM;
-
-  const res = await fetch(GROQ_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: modelo,
-      temperature: 0.1,
-      max_tokens: 512,
-      messages: [
-        {
-          role: "system",
-          content:
-            "Você retorna apenas JSON válido, sem markdown, sem explicações.",
-        },
-        { role: "user", content: prompt },
-      ],
-    }),
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Groq API: ${res.status} — ${err.slice(0, 200)}`);
-  }
-
-  const data = (await res.json()) as {
-    choices?: { message?: { content?: string } }[];
-    usage?: { prompt_tokens?: number; completion_tokens?: number };
-  };
-
-  const raw = data.choices?.[0]?.message?.content?.trim() ?? "";
-  const jsonStr = raw.replace(/^```json\s*/i, "").replace(/```\s*$/i, "");
-
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(jsonStr);
-  } catch {
-    throw new Error("Triagem: resposta inválida da API. Tente novamente.");
-  }
-
-  const resultado = resultadoTriagemSchema.parse(parsed);
-
   return {
-    resultado,
-    modelo,
-    tokens: {
-      entrada: data.usage?.prompt_tokens ?? 0,
-      saida: data.usage?.completion_tokens ?? 0,
-    },
+    triagem: parsed.data,
+    modelo: completion.modelo,
+    tokens: { entrada: completion.tokensEntrada, saida: completion.tokensSaida },
   };
 }
